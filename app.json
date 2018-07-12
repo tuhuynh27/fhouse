@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "sdkVersion": "26.0.0",
+    "name": "FHouse App",
+    "slug": "fhouse",
+    "icon": "src/images/app-icon.png",
+    "privacy": "public"
+  }
+}
