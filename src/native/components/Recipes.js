@@ -20,11 +20,11 @@ const RecipeListing = ({
   // Error
   if (error) return <Error content={error} />;
 
-  console.log('AHIHI', recipes);
-
   const keyExtractor = item => item.id.toString();
 
   const onPress = item => Actions.recipe({ match: { params: { id: String(item.id) } } });
+
+  console.log('Ahihi', recipes);
 
   return (
     <Container>
@@ -55,12 +55,13 @@ const RecipeListing = ({
               <CardItem cardBody>
                 <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
                   <Image
-                    source={{ uri: item.image[0] }}
+                    source={{ uri: item.images[0] }}
                     style={{
-                      height: 200,
-                      width: 200,
+                      height: 100,
+                      width: null,
                       flex: 1,
                       borderRadius: 0,
+                      marginTop: 10,
                     }}
                   />
                 </TouchableOpacity>
@@ -68,17 +69,10 @@ const RecipeListing = ({
               <CardItem cardBody>
                 <Body>
                   <Spacer size={10} />
-                  <Text style={{ fontWeight: '500' }}>{item.address}</Text>
-                  <Spacer size={15} />
-                  <Button
-                    block
-                    bordered
-                    small
-                    onPress={() => onPress(item)}
-                  >
-                    <Text>View Room</Text>
-                  </Button>
-                  <Spacer size={5} />
+                  <Text style={{ fontWeight: '800' }}>{item.address}</Text>
+                  <Spacer size={10} />
+                  <Text style={{ textAlign: 'right', flex: 1 }}>{item.price} VND</Text>
+                  <Spacer size={10} />
                 </Body>
               </CardItem>
             </Card>

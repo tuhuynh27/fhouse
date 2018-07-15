@@ -26,6 +26,7 @@ export default function recipeReducer(state = initialState, action) {
     }
     case 'RECIPES_REPLACE': {
       // let recipes = [];
+      // Using all from database
       const recipes = action.data;
 
       // Pick out the props I need

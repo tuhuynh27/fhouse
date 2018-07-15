@@ -50,18 +50,18 @@ class RecipeView extends React.Component {
     if (!recipe) return <Error content={ErrorMessages.recipe404} />;
 
     // Build Ingredients listing
-    const ingredients = recipe.ingredients.map(item => (
-      <ListItem key={item} rightIcon={{ style: { opacity: 0 } }}>
-        <Text>{item}</Text>
-      </ListItem>
-    ));
+    // const ingredients = recipe.ingredients.map(item => (
+    //   <ListItem key={item} rightIcon={{ style: { opacity: 0 } }}>
+    //     <Text>{item}</Text>
+    //   </ListItem>
+    // ));
 
     // Build Method listing
-    const method = recipe.method.map((item, index) => (
-      <ListItem key={item} rightIcon={{ style: { opacity: 0 } }}>
-        <Text><Text style={{ fontWeight: 'bold' }}>{index + 1} ... </Text> {item}</Text>
-      </ListItem>
-    ));
+    // const method = recipe.method.map((item, index) => (
+    //   <ListItem key={item} rightIcon={{ style: { opacity: 0 } }}>
+    //     <Text><Text style={{ fontWeight: 'bold' }}>{index + 1} ... </Text> {item}</Text>
+    //   </ListItem>
+    // ));
 
     return (
       <Container>
@@ -69,49 +69,41 @@ class RecipeView extends React.Component {
 
           <Card style={{ elevation: 3 }}>
             <CardItem>
-              <H3>{recipe.title}</H3>
+              <H3>{recipe.address}</H3>
             </CardItem>
             <CardItem cardBody>
-              <TouchableOpacity onPress={() => this.handleChangeImage(2)} style={{ flex: 1 }}>
-                <Image style={{ height: 200, width: null, flex: 1 }} source={{ uri: imageSlider[this.state.imageStep] }} />
+              <TouchableOpacity onPress={() => this.handleChangeImage(recipe.images.length)} style={{ flex: 1 }}>
+                <Image style={{ height: 200, width: null, flex: 1 }} source={{ uri: recipe.images[this.state.imageStep] }} />
               </TouchableOpacity>
             </CardItem>
             <CardItem>
-              <Icon name="heart" style={{ color: '#f93943' }} />
-              <Text>69</Text>
+              <Icon name="pricetag" style={{ color: '#000' }} />
+              <Text>{recipe.price}</Text>
               <Spacer size={25} />
               <Icon name="person" style={{ color: '#000' }} />
-              <Text>{recipe.author}</Text>
+              <Text>Tu Huynh</Text>
             </CardItem>
           </Card>
 
           <Tabs>
-            <Tab heading="About">
-              <Text style={{ padding: 20 }}>{recipe.body}</Text>
-            </Tab>
-            <Tab heading="Guide">
-              <List>
-                {method}
-              </List>
-            </Tab>
-            <Tab heading="Material">
-              <Content>
-                <List>
-                  {ingredients}
-                </List>
-              </Content>
-            </Tab>
-            <Tab heading="Comments">
-              <Content padder>
-                <Text style={{ padding: 10 }}>
-                  No comment here, be the first!
+            <Tab heading="Specs">
+              {/* <Text style={{ padding: 20 }}>{recipe.body}</Text> */}
+              <Text style={{ padding: 20 }}>
+                About Ahihi
               </Text>
-                <Form>
-                  <Textarea rowSpan={5} bordered placeholder="Leave your comment here..." style={{ padding: 10 }} />
-                </Form>
-                <Button block success>
-                  <Text>Add Comment</Text>
-                </Button>
+            </Tab>
+            <Tab heading="Utilities">
+              {/* <List>
+                {method}
+              </List> */}
+              <Text>List Utilities</Text>
+            </Tab>
+            <Tab heading="Description">
+              <Content>
+                {/* <List>
+                  {ingredients}
+                </List> */}
+                <Text>Description details</Text>
               </Content>
             </Tab>
           </Tabs>

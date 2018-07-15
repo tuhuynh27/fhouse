@@ -21,7 +21,7 @@
                 "equipment": ["refrigerator", "kitchen", "bed"]
             },
             "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-            "image": [
+            "images": [
                 "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5",
                 "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-2.jpg?alt=media&token=6ed1740b-529b-4772-9a92-615e92b544b2"
             ],
@@ -46,7 +46,7 @@
                 "equipment": []
             },
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae odio pellentesque, rhoncus risus ac, mollis nunc. Vivamus varius arcu libero, vel semper quam hendrerit at. Nam ut justo consequat, egestas nunc eu, imperdiet nulla. Nulla facilisi. Donec posuere porta massa, non egestas justo aliquet sed. Nullam a elementum arcu. Nunc hendrerit sagittis hendrerit. Nullam commodo scelerisque turpis, eu facilisis nunc hendrerit a. Nulla id dictum neque. Vestibulum id lobortis leo. Vestibulum scelerisque finibus purus, nec iaculis eros facilisis eu. Fusce vitae malesuada tellus, sit amet feugiat nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum eleifend iaculis orci, mattis fermentum purus vulputate eget. Sed lorem metus, ullamcorper non nunc sit amet, bibendum ullamcorper ligula.",
-            "image": [
+            "images": [
                 "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5",
                 "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-2.jpg?alt=media&token=6ed1740b-529b-4772-9a92-615e92b544b2"
             ],
