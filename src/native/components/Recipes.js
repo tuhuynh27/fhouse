@@ -45,9 +45,9 @@ const RecipeListing = ({
         <Spacer size={10} />
 
         <FlatList
-          // numColumns={2}
+          numColumns={2}
           data={recipes}
-          horizontal={true}
+          horizontal={false}
           renderItem={({ item }) => (
             <Card transparent style={{ paddingHorizontal: 6 }}>
               <CardItem cardBody>
@@ -57,8 +57,8 @@ const RecipeListing = ({
                     style={{
                       height: 200,
                       width: 200,
-                      // flex: 1,
-                      // borderRadius: 0,
+                      flex: 1,
+                      borderRadius: 0,
                     }}
                   />
                 </TouchableOpacity>
@@ -66,7 +66,7 @@ const RecipeListing = ({
               <CardItem cardBody>
                 <Body>
                   <Spacer size={10} />
-                  <Text style={{ fontWeight: '800' }}>{item.title}</Text>
+                  <Text style={{ fontWeight: '500' }}>{item.title}</Text>
                   <Spacer size={15} />
                   <Button
                     block
