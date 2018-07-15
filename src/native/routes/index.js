@@ -37,7 +37,7 @@ const Index = (
         swipeEnabled
         type="replace"
         showLabel={false}
-        
+
         tabBarPosition="bottom"
         {...DefaultProps.tabProps}
       >
@@ -57,6 +57,15 @@ const Index = (
           {...DefaultProps.navbarProps}
         >
           <Scene key="recipes" component={RecipesContainer} Layout={RecipesComponent} />
+        </Stack>
+
+        <Stack
+          key="chat"
+          title="SETUP"
+          icon={() => <Icon name="chatbubbles" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
         </Stack>
 
         <Stack

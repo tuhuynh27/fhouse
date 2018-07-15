@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FlatList, TouchableOpacity, RefreshControl, Image } from 'react-native';
-import { Container, Content, Card, CardItem, Body, Text, Button, Item, Icon, Input, Header } from 'native-base';
+import { Container, Content, Card, CardItem, Body, Text, Button, Item, Icon, Input, Header, H2 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Error from './Error';
@@ -20,7 +20,7 @@ const RecipeListing = ({
   // Error
   if (error) return <Error content={error} />;
 
-  const keyExtractor = item => item.id;
+  const keyExtractor = item => item.id.toString();
 
   const onPress = item => Actions.recipe({ match: { params: { id: String(item.id) } } });
 
@@ -37,6 +37,10 @@ const RecipeListing = ({
             <Text>Search</Text>
           </Button>
         </Header>
+
+        <Spacer size={20} />
+
+        <H2 style={{textAlign: 'center'}}>Cheapeast Room</H2>
 
         <Spacer size={10} />
 

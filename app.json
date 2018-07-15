@@ -4,6 +4,11 @@
     "name": "FHouse App",
     "slug": "fhouse",
     "icon": "src/images/app-icon.png",
-    "privacy": "public"
+    "privacy": "public",
+    "splash": {
+      "backgroundColor": "#3F51B5",
+      "resizeMode": "cover",
+      "image": "./src/images/intro.png"
+    }
   }
 }
