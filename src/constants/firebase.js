@@ -3,6 +3,6 @@ export default {
   authDomain: "fhouse-app.firebaseapp.com",
   databaseURL: "https://fhouse-app.firebaseio.com",
   projectId: "fhouse-app",
-  storageBucket: "",
+  storageBucket: "fhouse-app.appspot.com",
   messagingSenderId: "765040613002"
 };

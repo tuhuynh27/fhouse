@@ -77,7 +77,7 @@ export function setError(message) {
 export function getRecipes() {
   if (Firebase === null) return () => new Promise(resolve => resolve());
 
-  return dispatch => new Promise(resolve => FirebaseRef.child('recipes')
+  return dispatch => new Promise(resolve => FirebaseRef.child('rooms')
     .on('value', (snapshot) => {
       const recipes = snapshot.val() || {};
 
