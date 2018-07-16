@@ -1,26 +1,30 @@
 import React from 'react';
-import { Container, Content } from 'native-base';
-import { Image, StyleSheet } from 'react-native';
-import Spacer from './Spacer';
+import { Container, Content, Button, Icon, Text } from 'native-base';
+import { ImageBackground, StyleSheet } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+
+// Device height
+import { Dimensions } from "react-native";
+
+const deviceHeight = Dimensions.get("window").height;
 
 const About = () => (
   <Container>
-    <Content>
-      <Image
-        source={{ uri: 'https://uphinhnhanh.com/images/2018/07/12/ScreenShot2018-07-12at14.17.28.png' }}
-        style={styles.canvas}
-      />
+    <Content bounces={false}>
+      <ImageBackground
+        source={require("../../images/about.jpg")}
+        style={{ width: '100%', height: deviceHeight }}
+      >
+        <Button success
+          style={{ position: 'absolute', bottom: deviceHeight / 10, left: 40 }}
+          onPress={Actions.recipes}
+        >
+          <Icon name="arrow-dropright-circle"></Icon>
+          <Text>View best room for you</Text>
+        </Button>
+      </ImageBackground>
     </Content>
   </Container>
 );
-
-const styles = StyleSheet.create({
-  canvas: {
-    height: 800,
-    width: null,
-    borderWidth: 0,
-    flex: 1,
-  },
-});
 
 export default About;

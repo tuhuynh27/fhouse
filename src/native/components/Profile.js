@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
-import { Container, Content, List, ListItem, Body, Left, Text, Icon } from 'native-base';
+import { View, ImageBackground } from 'react-native';
+import { Container, Content, List, ListItem, Body, Left, Text, Icon, Card, CardItem, Right, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Header from './Header';
 
+// Device height
+import { Dimensions } from "react-native";
+
+const deviceHeight = Dimensions.get("window").height;
+
 const Profile = ({ member, logout }) => (
   <Container>
-    <Content>
+    <Content bounces={false}>
       <List>
         {(member && member.email) ?
           <View>
@@ -35,16 +40,29 @@ const Profile = ({ member, logout }) => (
               </Body>
             </ListItem>
           </View>
-        :
+          :
           <View>
-            <Content padder>
+            {/* <Content padder>
               <Header
                 title="Hi there,"
                 content="Please login to gain extra access"
               />
-            </Content>
+            </Content> */}
 
-            <ListItem onPress={Actions.login} icon>
+            <ImageBackground
+              style={{ width: '100%', height: deviceHeight }}
+              source={require("../../images/feature.jpg")}
+            >
+              <Button primary
+                style={{ position: 'absolute', bottom: deviceHeight / 5, left: 20 }}
+                onPress={Actions.login}
+              >
+                <Icon name="logo-facebook"></Icon>
+                <Text>Login with Facebook</Text>
+              </Button>
+            </ImageBackground>
+
+            {/* <ListItem onPress={Actions.login} icon>
               <Left>
                 <Icon name="power" />
               </Left>
@@ -67,17 +85,9 @@ const Profile = ({ member, logout }) => (
               <Body>
                 <Text>Forgot Password</Text>
               </Body>
-            </ListItem>
+            </ListItem> */}
           </View>
         }
-        <ListItem onPress={Actions.locale} icon>
-          <Left>
-            <Icon name="ios-flag" />
-          </Left>
-          <Body>
-            <Text>Change Language</Text>
-          </Body>
-        </ListItem>
       </List>
     </Content>
   </Container>

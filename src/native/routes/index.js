@@ -42,6 +42,7 @@ const Index = (
         {...DefaultProps.tabProps}
       >
         <Stack
+          hideNavBar
           key="home"
           title={AppConfig.appName.toUpperCase()}
           icon={() => <Icon name="home" {...DefaultProps.icons} />}
@@ -61,7 +62,7 @@ const Index = (
 
         <Stack
           key="chat"
-          title="SETUP"
+          title="CHAT"
           icon={() => <Icon name="chatbubbles" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >

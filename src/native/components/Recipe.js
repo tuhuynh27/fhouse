@@ -7,7 +7,7 @@ import ErrorMessages from '../../constants/errors';
 import Error from './Error';
 import Spacer from './Spacer';
 
-import { toCurrency, normalizeStr } from '../../common/util';
+import { toCurrency, toTitleCase, normalizeStr } from '../../common/util';
 
 class RecipeView extends React.Component {
   constructor(props) {
@@ -62,14 +62,14 @@ class RecipeView extends React.Component {
         <Body><Text>{normalizeStr(item)}</Text></Body>
       </ListItem>
     ));
-
+    
     return (
       <Container>
         <Content padder>
 
           <Card style={{ elevation: 3 }}>
             <CardItem>
-              <H3>{recipe.address}</H3>
+              <H3>{toTitleCase(recipe.address)}</H3>
             </CardItem>
             <CardItem cardBody>
               <TouchableOpacity onPress={() => this.handleChangeImage(recipe.images.length)} style={{ flex: 1 }}>
@@ -107,7 +107,7 @@ class RecipeView extends React.Component {
                     <Text>Call</Text>
                   </Button>
                   <Button warning style={{ width: '45%', alignItems: 'center', justifyContent: 'center' }}>
-                    <Icon name='chatbubbles' />
+                    <Icon name='text' />
                     <Text>SMS</Text>
                   </Button>
                 </View>

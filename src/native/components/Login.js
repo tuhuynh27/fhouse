@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Content, Form, Item, Label, Input, Text, Button, View } from 'native-base';
+import { Container, Content, Form, Item, Label, Input, Text, Button, View, Toast } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Messages from './Messages';
@@ -49,6 +49,15 @@ class Login extends React.Component {
       .catch(e => console.log(`Error: ${e}`));
   }
 
+  componentDidMount() {
+    Toast.show({
+      text: "Facebook login is currently not available and will be back soon!",
+      duration: 3000,
+      type: "warning",
+      position: "top"
+    });
+  }
+
   render() {
     const { loading, error, locale } = this.props;
 
@@ -62,7 +71,6 @@ class Login extends React.Component {
               title="Welcome back"
               content="Please use your email and password to login."
             /> */}
-
             {error && <Messages message={error} />}
           </View>
 
@@ -90,9 +98,12 @@ class Login extends React.Component {
               <Button primary block onPress={this.handleSubmit}>
                 <Text>Login</Text>
               </Button>
-              <Button transparent dark block>
-                <Text>Forgot Password</Text>
+              <Button transparent dark block onPress={Actions.signUp}>
+                <Text>New member? Tap here!!</Text>
               </Button>
+              {/* <Button transparent dark block>
+                <Text>Forgot Password</Text>
+              </Button> */}
             </View>
           </Form>
         </Content>

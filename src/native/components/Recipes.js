@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FlatList, TouchableOpacity, RefreshControl, Image } from 'react-native';
-import { Container, Content, Card, CardItem, Body, Text, Button, Item, Icon, Input, Header, H2, H3 } from 'native-base';
+import { Container, Content, Card, CardItem, Text, Icon, H2 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Error from './Error';
 import Spacer from './Spacer';
 
-import { toCurrency } from '../../common/util';
+import { toCurrency, toTitleCase } from '../../common/util';
 
 const RecipeListing = ({
   error,
@@ -27,18 +27,7 @@ const RecipeListing = ({
 
   return (
     <Container>
-      <Content padder>
-        <Header searchBar title="Search">
-          <Item>
-            <Icon name="ios-search" />
-            <Input placeholder="Search..." />
-            <Icon name="book" />
-          </Item>
-          <Button transparent>
-            <Text>Search</Text>
-          </Button>
-        </Header>
-
+      <Content padder>=
         <Spacer size={20} />
 
         <H2 style={{ textAlign: 'center' }}>Suggested Room</H2>
@@ -50,9 +39,13 @@ const RecipeListing = ({
           data={recipes}
           horizontal={false}
           renderItem={({ item }) => (
-            <Card transparent style={{ paddingHorizontal: 6 }}>
+            <Card transparent style={{ paddingHorizontal: 4 }}>
               <CardItem>
-                <Text style={{ height: 40, fontWeight: '800' }}>{item.address}</Text>
+                <Text style={{ height: 40, fontWeight: '800' }}>{toTitleCase(item.address)}</Text>
+              </CardItem>
+              <CardItem>
+                <Icon name="pin" style={{ color: '#000' }} />
+                <Text>{item.district}</Text>
               </CardItem>
               <CardItem cardBody>
                 <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
@@ -68,6 +61,7 @@ const RecipeListing = ({
                   />
                 </TouchableOpacity>
               </CardItem>
+
               <CardItem>
                 <Icon name="pricetag" style={{ color: '#000' }} />
                 <Text>{toCurrency(item.price)}</Text>

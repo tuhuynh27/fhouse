@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Content, Text, Form, Item, Label, Input, Button } from 'native-base';
+import { Container, Content, Text, Form, Item, Label, Input, Button, View } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Messages from './Messages';
@@ -53,25 +53,31 @@ class SignUp extends React.Component {
     return (
       <Container>
         <Content padder>
-          <Header
+          {/* <Header
             title="Welcome"
             content="We're glad to welcome you to the community. There's only a few questions and you'll be on your way."
-          />
+          /> */}
+
+          <View padder>
+            <Text style={{fontWeight: 'bold'}}>
+              Please fill in the form below to sign up
+            </Text>
+          </View>
 
           {error && <Messages message={error} />}
 
           <Form>
-            <Item stackedLabel>
+            <Item>
               <Label>First Name</Label>
               <Input onChangeText={v => this.handleChange('firstName', v)} />
             </Item>
 
-            <Item stackedLabel>
+            <Item>
               <Label>Last Name</Label>
               <Input onChangeText={v => this.handleChange('lastName', v)} />
             </Item>
 
-            <Item stackedLabel>
+            <Item>
               <Label>Email</Label>
               <Input
                 autoCapitalize="none"
@@ -80,12 +86,12 @@ class SignUp extends React.Component {
               />
             </Item>
 
-            <Item stackedLabel>
+            <Item>
               <Label>Password</Label>
               <Input secureTextEntry onChangeText={v => this.handleChange('password', v)} />
             </Item>
 
-            <Item stackedLabel>
+            <Item>
               <Label>Confirm Password</Label>
               <Input secureTextEntry onChangeText={v => this.handleChange('password2', v)} />
             </Item>

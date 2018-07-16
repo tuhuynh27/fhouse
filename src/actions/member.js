@@ -68,6 +68,13 @@ function getUserData(dispatch) {
   });
 }
 
+export function getUserDataByID(uid) {
+  const ref = FirebaseRef.child(`users/${uid}`);
+  return ref.on('value', (snapshot) => {
+    return snapshot.val() || [];
+  });
+}
+
 export function getMemberData() {
   if (Firebase === null) return () => new Promise(resolve => resolve());
 

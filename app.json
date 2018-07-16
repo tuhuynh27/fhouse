@@ -6,9 +6,9 @@
     "icon": "src/images/app-icon.png",
     "privacy": "public",
     "splash": {
-      "backgroundColor": "#3F51B5",
+      "backgroundColor": "#5751ef",
       "resizeMode": "cover",
-      "image": "./src/images/intro.png"
+      "image": "./src/images/feature.jpg"
     }
   }
 }
