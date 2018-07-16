@@ -27,7 +27,7 @@ const RecipeListing = ({
 
   return (
     <Container>
-      <Content padder>=
+      <Content padder>
         <Spacer size={20} />
 
         <H2 style={{ textAlign: 'center' }}>Suggested Room</H2>
