@@ -5,8 +5,9 @@ import { Container, Content, Card, CardItem, Body, Text, Button, Item, Icon, Inp
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Error from './Error';
-// import Header from './Header';
 import Spacer from './Spacer';
+
+import { toCurrency } from '../../common/util';
 
 const RecipeListing = ({
   error,
@@ -69,7 +70,7 @@ const RecipeListing = ({
               </CardItem>
               <CardItem>
                 <Icon name="pricetag" style={{ color: '#000' }} />
-                <Text>{item.price} VND</Text>
+                <Text>{toCurrency(item.price)}</Text>
               </CardItem>
             </Card>
           )}

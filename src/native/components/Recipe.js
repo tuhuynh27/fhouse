@@ -7,6 +7,8 @@ import ErrorMessages from '../../constants/errors';
 import Error from './Error';
 import Spacer from './Spacer';
 
+import { toCurrency, normalizeStr } from '../../common/util';
+
 class RecipeView extends React.Component {
   constructor(props) {
     super(props);
@@ -43,8 +45,6 @@ class RecipeView extends React.Component {
       recipe = recipes.find(item => parseInt(item.id, 10) === parseInt(recipeId, 10));
     }
 
-    console.log('Aihih', recipe);
-
     // Recipe not found
     if (!recipe) return <Error content={ErrorMessages.recipe404} />;
 
@@ -52,14 +52,14 @@ class RecipeView extends React.Component {
     const utilities = recipe.utilities.map(item => (
       <ListItem key={item} rightIcon={{ style: { opacity: 0 } }}>
         <CheckBox checked={true} color="blue" />
-        <Body><Text>{item}</Text></Body>
+        <Body><Text>{normalizeStr(item)}</Text></Body>
       </ListItem>
     ));
 
     const equipment = recipe.equipment.map(item => (
-      <ListItem key={item} rightIcon={{ style: { opacity: 0 } }}>
-        <CheckBox checked={true} color="green"/>
-        <Body><Text>{item}</Text></Body>
+      <ListItem key={normalizeStr(item)} rightIcon={{ style: { opacity: 0 } }}>
+        <CheckBox checked={true} color="green" />
+        <Body><Text>{normalizeStr(item)}</Text></Body>
       </ListItem>
     ));
 
@@ -78,7 +78,7 @@ class RecipeView extends React.Component {
             </CardItem>
             <CardItem>
               <Icon name="pricetag" style={{ color: '#000' }} />
-              <Text>{recipe.price} VND</Text>
+              <Text>{toCurrency(recipe.price)}</Text>
               <Spacer size={25} />
               <Icon name="person" style={{ color: '#000' }} />
               <Text>Tu Huynh</Text>
@@ -95,7 +95,7 @@ class RecipeView extends React.Component {
                   <Text style={{ fontWeight: 'bold' }}>Accommodation</Text>: {recipe.roomates} people
                 </Text>
                 <Text>
-                  <Text style={{ fontWeight: 'bold' }}>Gender</Text>: {recipe.gender}
+                  <Text style={{ fontWeight: 'bold' }}>Gender</Text>: For {normalizeStr(recipe.gender)}
                 </Text>
                 <Text>
                   <Text style={{ fontWeight: 'bold' }}>Room Square</Text>: {recipe.square} m2
