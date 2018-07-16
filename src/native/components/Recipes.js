@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FlatList, TouchableOpacity, RefreshControl, Image } from 'react-native';
-import { Container, Content, Card, CardItem, Body, Text, Button, Item, Icon, Input, Header, H2 } from 'native-base';
+import { Container, Content, Card, CardItem, Body, Text, Button, Item, Icon, Input, Header, H2, H3 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Error from './Error';
@@ -20,11 +20,9 @@ const RecipeListing = ({
   // Error
   if (error) return <Error content={error} />;
 
-  const keyExtractor = item => item.id.toString();
+  const keyExtractor = item => item.id;
 
   const onPress = item => Actions.recipe({ match: { params: { id: String(item.id) } } });
-
-  console.log('Ahihi', recipes);
 
   return (
     <Container>
@@ -42,7 +40,7 @@ const RecipeListing = ({
 
         <Spacer size={20} />
 
-        <H2 style={{textAlign: 'center'}}>Cheapeast Room</H2>
+        <H2 style={{ textAlign: 'center' }}>Suggested Room</H2>
 
         <Spacer size={10} />
 
@@ -52,6 +50,9 @@ const RecipeListing = ({
           horizontal={false}
           renderItem={({ item }) => (
             <Card transparent style={{ paddingHorizontal: 6 }}>
+              <CardItem>
+                <Text style={{ height: 40, fontWeight: '800' }}>{item.address}</Text>
+              </CardItem>
               <CardItem cardBody>
                 <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
                   <Image
@@ -66,14 +67,9 @@ const RecipeListing = ({
                   />
                 </TouchableOpacity>
               </CardItem>
-              <CardItem cardBody>
-                <Body>
-                  <Spacer size={10} />
-                  <Text style={{ fontWeight: '800' }}>{item.address}</Text>
-                  <Spacer size={10} />
-                  <Text style={{ textAlign: 'right', flex: 1 }}>{item.price} VND</Text>
-                  <Spacer size={10} />
-                </Body>
+              <CardItem>
+                <Icon name="pricetag" style={{ color: '#000' }} />
+                <Text>{item.price} VND</Text>
               </CardItem>
             </Card>
           )}

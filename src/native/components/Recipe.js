@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Image, TouchableOpacity } from 'react-native';
 
-import { Container, Content, H3, List, ListItem, Text, Button, Tab, Tabs, Textarea, Form, Card, CardItem, Icon, Left, Body } from 'native-base';
+import { Container, Content, H3, List, ListItem, Text, Button, Tab, Tabs, Textarea, Form, Card, CardItem, Icon, Left, Body, View } from 'native-base';
 import ErrorMessages from '../../constants/errors';
 import Error from './Error';
 import Spacer from './Spacer';
@@ -16,9 +16,9 @@ class RecipeView extends React.Component {
   }
 
   handleChangeImage(length) {
-    let { imageStep } = this.state;
+    let imageStep = this.state.imageStep;
 
-    if (imageStep >= length - 1) {
+    if (imageStep === length - 1) {
       imageStep = 0;
     } else {
       imageStep = imageStep + 1;
@@ -30,12 +30,9 @@ class RecipeView extends React.Component {
   }
 
   render() {
+
     // Props
     const { error, recipes, recipeId } = this.props;
-    const imageSlider = [
-      "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5",
-      "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-2.jpg?alt=media&token=6ed1740b-529b-4772-9a92-615e92b544b2"
-    ];
 
     // Error
     if (error) return <Error content={error} />;
@@ -78,7 +75,7 @@ class RecipeView extends React.Component {
             </CardItem>
             <CardItem>
               <Icon name="pricetag" style={{ color: '#000' }} />
-              <Text>{recipe.price}</Text>
+              <Text>{recipe.price} VND</Text>
               <Spacer size={25} />
               <Icon name="person" style={{ color: '#000' }} />
               <Text>Tu Huynh</Text>
@@ -88,9 +85,11 @@ class RecipeView extends React.Component {
           <Tabs>
             <Tab heading="Specs">
               {/* <Text style={{ padding: 20 }}>{recipe.body}</Text> */}
-              <Text style={{ padding: 20 }}>
-                About Ahihi
-              </Text>
+              <View style={{ padding: 20 }}>
+                <Text>
+                  <Text style={{ fontWeight: 'bold' }}>Location</Text>: {recipe.district}, {recipe.city}
+                </Text>
+              </View>
             </Tab>
             <Tab heading="Utilities">
               {/* <List>

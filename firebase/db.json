@@ -1,0 +1,66 @@
+{
+    "rooms": [
+        {
+            "address": "1204 Quang Trung Street",
+            "city": "HCMC",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "district": "Go Vap",
+            "equipment:": [
+                "refrigerator",
+                "kitchen",
+                "bed"
+            ],
+            "gender": "male",
+            "id": 1,
+            "images": [
+                "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5",
+                "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-2.jpg?alt=media&token=6ed1740b-529b-4772-9a92-615e92b544b2"
+            ],
+            "isFindRoomate": true,
+            "phoneNumber": "01202751588",
+            "price": 3500000,
+            "roomates": 2,
+            "square": 25,
+            "status": 0,
+            "userID": "null",
+            "utilities": [
+                "parking place",
+                "room toilet",
+                "private wifi",
+                "time freedom"
+            ],
+            "views": 0
+        },
+        {
+            "address": "32 To Ky",
+            "city": "HCMC",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "district": "Go Vap",
+            "equipment:": [
+                "refrigerator",
+                "kitchen",
+                "bed"
+            ],
+            "gender": "male",
+            "id": 2,
+            "images": [
+                "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5",
+                "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-2.jpg?alt=media&token=6ed1740b-529b-4772-9a92-615e92b544b2"
+            ],
+            "isFindRoomate": true,
+            "phoneNumber": "01202751588",
+            "price": 3500000,
+            "roomates": 2,
+            "square": 25,
+            "status": 0,
+            "userID": "null",
+            "utilities": [
+                "parking place",
+                "room toilet",
+                "private wifi",
+                "time freedom"
+            ],
+            "views": 0
+        }
+    ]
+}
