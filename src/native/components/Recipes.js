@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FlatList, TouchableOpacity, RefreshControl, Image } from 'react-native';
-import { Container, Content, Card, CardItem, Text, Icon, H2 } from 'native-base';
+import { Container, Content, Card, CardItem, Text, Icon, H2, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Error from './Error';
@@ -32,6 +32,13 @@ const RecipeListing = ({
 
         <H2 style={{ textAlign: 'center' }}>Suggested Room</H2>
 
+        <Spacer size={20} />
+
+        <Button block rounded primary onPress={Actions.addRoom}>
+          <Icon name="add"></Icon>
+          <Text>Add New Room</Text>
+        </Button>
+
         <Spacer size={10} />
 
         <FlatList
@@ -45,7 +52,7 @@ const RecipeListing = ({
               </CardItem>
               <CardItem>
                 <Icon name="pin" style={{ color: '#000' }} />
-                <Text>{item.district}</Text>
+                <Text>{item.district} Dist.</Text>
               </CardItem>
               <CardItem cardBody>
                 <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>

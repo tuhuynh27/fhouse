@@ -28,6 +28,7 @@ import MemberContainer from '../../containers/Member';
 import ProfileComponent from '../components/Profile';
 
 import AboutComponent from '../components/About';
+import AddRoomComponent from '../components/AddRoom';
 
 const Index = (
   <Stack>
@@ -58,6 +59,7 @@ const Index = (
           {...DefaultProps.navbarProps}
         >
           <Scene key="recipes" component={RecipesContainer} Layout={RecipesComponent} />
+          <Scene key="addRoom" component={AddRoomComponent} />
         </Stack>
 
         <Stack

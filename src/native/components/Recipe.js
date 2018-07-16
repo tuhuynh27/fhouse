@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity, Linking } from 'react-native';
 
 import { Container, Content, H3, List, ListItem, Text, Button, Tab, Tabs, Textarea, Form, Card, CardItem, Icon, Left, Body, View, CheckBox } from 'native-base';
 import ErrorMessages from '../../constants/errors';
@@ -29,6 +29,14 @@ class RecipeView extends React.Component {
     this.setState({
       imageStep: imageStep
     });
+  }
+
+  handleMakeCall(phoneNumber) {
+    Linking.openURL(`tel:${phoneNumber}`);
+  }
+
+  handleMakeSMS(phoneNumber) {
+    Linking.openURL(`sms:${phoneNumber}`);
   }
 
   render() {
@@ -102,11 +110,11 @@ class RecipeView extends React.Component {
                 </Text>
                 <Spacer size={20} />
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <Button info style={{ width: '45%', alignItems: 'center', justifyContent: 'center' }}>
+                  <Button info style={{ width: '45%', alignItems: 'center', justifyContent: 'center' }} onPress={() => this.handleMakeCall(recipe.phoneNumber)}>
                     <Icon name='call' />
                     <Text>Call</Text>
                   </Button>
-                  <Button warning style={{ width: '45%', alignItems: 'center', justifyContent: 'center' }}>
+                  <Button warning style={{ width: '45%', alignItems: 'center', justifyContent: 'center' }} onPress={() => this.handleMakeSMS(recipe.phoneNumber)}>
                     <Icon name='text' />
                     <Text>SMS</Text>
                   </Button>
