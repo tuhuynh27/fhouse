@@ -27,3 +27,13 @@ export const toTitleCase = (str) => {
         });
     }
 }
+
+export const showUnsignedString = (str) => {
+    const signedChars   = "àảãáạăằẳẵắặâầẩẫấậđèẻẽéẹêềểễếệìỉĩíịòỏõóọôồổỗốộơờởỡớợùủũúụưừửữứựỳỷỹýỵ";
+    const unsignedChars = "aaaaaaaaaaaaaaaaadeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyy";
+    const lookup = unsignedChars + unsignedChars.toUpperCase();
+    var pattern = new RegExp("[" + signedChars + signedChars.toUpperCase() + "]", "g");
+    return output = str.replace(pattern, function (m, key, value) {
+        return lookup.charAt(signedChars.indexOf(m));
+    });
+}
