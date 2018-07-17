@@ -52,8 +52,8 @@ class AddRoom extends React.Component {
 
         let result = await ImagePicker.launchImageLibraryAsync({
             // Set image size
-            // allowsEditing: true,
-            // aspect: [16, 9],
+            allowsEditing: true,
+            aspect: [16, 9],
         });
 
         console.log(result);
@@ -72,50 +72,27 @@ class AddRoom extends React.Component {
             throw new Error('Location permission not granted');
         }
     }
-
-    handleAddUtility() {
-        let listUtilities = this.state.listUtilities;
-        listUtilities.push(this.state.utility);
-
-        this.setState({
-            listUtilities,
-            utility: null
-        });
-    }
-
-    handleRemoveUtility(item) {
-        let listUtilities = this.state.listUtilities;
-        const index = this.state.listUtilities.indexOf(item);
+    
+    handleRemoveFromList(option, item) {
+        let list = this.state[option];
+        const index = list.indexOf(item);
 
         if (index !== -1) {
-            listUtilities.splice(index, 1);
+            list.splice(index, 1);
         }
 
         this.setState({
-            listUtilities
+            [option]: list
         });
     }
 
-    handleAddEquipment() {
-        let listEquipments = this.state.listEquipments;
-        listEquipments.push(this.state.equipment);
+    handleAddToList(option, field) {
+        let list = this.state[option];
+        list.push(this.state[field]);
 
         this.setState({
-            listEquipments,
-            equipment: null
-        });
-    }
-
-    handleRemoveEquipment(item) {
-        let listEquipments = this.state.listEquipments;
-        const index = this.state.listEquipments.indexOf(item);
-
-        if (index !== -1) {
-            listEquipments.splice(index, 1);
-        }
-
-        this.setState({
-            listEquipments
+            [option]: list,
+            [field]: null
         });
     }
 
@@ -133,14 +110,14 @@ class AddRoom extends React.Component {
     render() {
         const renderListUtilities = this.state.listUtilities.map(item => (
             <ListItem key={item} rightIcon={{ style: { opacity: 0 } }}>
-                <CheckBox checked={true} color="blue" onPress={() => this.handleRemoveUtility(item)} />
+                <CheckBox checked={true} color="blue" onPress={() => this.handleRemoveFromList('listUtilities', item)} />
                 <Body><Text>{normalizeStr(item)}</Text></Body>
             </ListItem>
         ));
 
         const renderListEquipments = this.state.listEquipments.map(item => (
             <ListItem key={item} rightIcon={{ style: { opacity: 0 } }}>
-                <CheckBox checked={true} color="blue" onPress={() => this.handleRemoveEquipment(item)} />
+                <CheckBox checked={true} color="blue" onPress={() => this.handleRemoveFromList('listEquipments', item)} />
                 <Body><Text>{normalizeStr(item)}</Text></Body>
             </ListItem>
         ));
@@ -225,7 +202,7 @@ class AddRoom extends React.Component {
                             <Label>New utility</Label>
                             <Input value={this.state.utility} onChangeText={v => this.handleChange('utility', v)} />
                         </Item>
-                        <Button block rounded info onPress={() => this.handleAddUtility()}>
+                        <Button block rounded info onPress={() => this.handleAddToList('listUtilities', 'utility')}>
                             <Icon name="add"></Icon>
                             <Text>Add</Text>
                         </Button>
@@ -240,7 +217,7 @@ class AddRoom extends React.Component {
                             <Label>New equipment</Label>
                             <Input value={this.state.equipment} onChangeText={v => this.handleChange('equipment', v)} />
                         </Item>
-                        <Button block rounded info onPress={() => this.handleAddEquipment()}>
+                        <Button block rounded info onPress={() => this.handleAddToList('listEquipments', 'equipment')}>
                             <Icon name="add"></Icon>
                             <Text>Add</Text>
                         </Button>
