@@ -6,6 +6,7 @@ import { ImagePicker } from 'expo';
 import { Actions } from 'react-native-router-flux';
 
 import { normalizeStr } from '../../common/util';
+import { validatePhone, validateNumber, greaterThanZero } from '../../common/validate';
 
 class AddRoom extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class AddRoom extends React.Component {
         this.state = {
             districtSelect: 'binh thanh',
             genderSelect: 'any',
-            image: null,
+            images: [],
             listUtilities: [
                 "parking place",
                 "room toilet"
@@ -23,7 +24,12 @@ class AddRoom extends React.Component {
                 "bed"
             ],
             utility: '',
-            equipment: ''
+            equipment: '',
+            address: '',
+            square: null,
+            price: null,
+            phone: null,
+            numOfRoomates: null
         };
     }
 
@@ -48,18 +54,29 @@ class AddRoom extends React.Component {
 
     handlePickImage = async () => {
         // Get permission for iOS devices
-        this.handleGetPermission();
+        let permission = await this.handleGetPermission();
 
-        let result = await ImagePicker.launchImageLibraryAsync({
-            // Set image size
-            allowsEditing: true,
-            aspect: [16, 9],
-        });
-
-        console.log(result);
-
-        if (!result.cancelled) {
-            this.setState({ image: result.uri });
+        if (permission) {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                // Set images size
+                allowsEditing: true,
+                aspect: [16, 9],
+            });
+    
+            if (!result.cancelled) {
+                let images = this.state.images;
+                images.push(result.uri)
+                this.setState({ images });
+            }
+        } else {
+            Toast.show({
+                text: 'Please accept camera permission to continue!',
+                duration: 5000,
+                style: {
+                    backgroundColor: "red"
+                },
+                position: "top"
+            });
         }
     };
 
@@ -67,12 +84,13 @@ class AddRoom extends React.Component {
         const { Location, Permissions } = Expo;
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
         if (status === 'granted') {
-            // Granted
+            return true;
         } else {
-            throw new Error('Location permission not granted');
+            // throw new Error('Location permission not granted');
+            return false;
         }
     }
-    
+
     handleRemoveFromList(option, item) {
         let list = this.state[option];
         const index = list.indexOf(item);
@@ -87,27 +105,64 @@ class AddRoom extends React.Component {
     }
 
     handleAddToList(option, field) {
+        const value = this.state[field]
         let list = this.state[option];
-        list.push(this.state[field]);
 
-        this.setState({
-            [option]: list,
-            [field]: null
-        });
+        if (value && value.trim()) {
+            list.push(value);
+            this.setState({
+                [option]: list,
+                [field]: null
+            });
+        }
     }
 
     handlePostRoom() {
+        // TODO validate
+        const {
+            districtSelect,
+            genderSelect,
+            images,
+            address,
+            square,
+            price,
+            phone,
+            numOfRoomates
+        } = this.state;
+        let valid = false;
+
+        if (districtSelect 
+            && genderSelect 
+            // && images && images.length === 0 
+            && address.trim() 
+            && square && validateNumber(square) && greaterThanZero(square)
+            && price && validateNumber(price)  && greaterThanZero(price)
+            && phone && validatePhone(phone) 
+            && numOfRoomates && validateNumber(numOfRoomates) && greaterThanZero(numOfRoomates)
+        ) {
+            valid = true;
+        }
+
         Toast.show({
-            text: "Room posted success and waiting for admin approval",
+            text: `Room posted ${valid ? "success and waiting for admin approval" : "fail"} `,
             duration: 3000,
-            type: "success",
+            style: {
+                backgroundColor: valid ? "green" : "red"
+            },
             position: "top"
         });
 
-        Actions.recipes();
+        if (valid) {
+            Actions.recipes();
+        }
     }
 
     render() {
+        const renderImages = this.state.images.map(item => (
+            // <Image source={{ uri: item }} style={{ height: 200, width: null, flex: 1 }} />
+            <Text>{item}</Text>
+        ));
+
         const renderListUtilities = this.state.listUtilities.map(item => (
             <ListItem key={item} rightIcon={{ style: { opacity: 0 } }}>
                 <CheckBox checked={true} color="blue" onPress={() => this.handleRemoveFromList('listUtilities', item)} />
@@ -135,7 +190,7 @@ class AddRoom extends React.Component {
                     <Form>
                         <Item inlineLabel>
                             <Label>Address</Label>
-                            <Input />
+                            <Input value={this.state.address} onChangeText={val => this.handleChange('address', val)}/>
                         </Item>
                         <Picker
                             mode="dropdown"
@@ -153,19 +208,27 @@ class AddRoom extends React.Component {
                         </Picker>
                         <Item inlineLabel>
                             <Label>Square (in M2)</Label>
-                            <Input keyboardType="numeric" />
+                            <Input keyboardType="numeric" 
+                            value={this.state.addresss} 
+                            onChangeText={val => this.handleChange('square', val)} />
                         </Item>
                         <Item inlineLabel>
                             <Label>Price (in VND)</Label>
-                            <Input keyboardType="numeric" />
+                            <Input keyboardType="numeric" 
+                            value={this.state.price} 
+                            onChangeText={val => this.handleChange('price', val)} />
                         </Item>
                         <Item inlineLabel>
                             <Label>Phone Number</Label>
-                            <Input keyboardType="numeric" />
+                            <Input keyboardType="numeric" 
+                            value={this.state.phone} 
+                            onChangeText={val => this.handleChange('phone', val)} />
                         </Item>
                         <Item inlineLabel>
                             <Label>Number of Roomate Allow</Label>
-                            <Input keyboardType="numeric" />
+                            <Input keyboardType="numeric" 
+                            value={this.state.numOfRoomates} 
+                            onChangeText={val => this.handleChange('numOfRoomates', val)} />
                         </Item>
                         <Picker
                             mode="dropdown"
@@ -175,9 +238,9 @@ class AddRoom extends React.Component {
                             selectedValue={this.state.genderSelect}
                             onValueChange={(v) => this.onGenderChange(v)}
                         >
-                            <Picker.Item label="Allow any gender" value="any" />
-                            <Picker.Item label="Only for male" value="male" />
-                            <Picker.Item label="Only for female" value="female" />
+                            <Picker.Item label="Any gender" value="any" />
+                            <Picker.Item label="Male Only" value="male" />
+                            <Picker.Item label="Female Only" value="female" />
                         </Picker>
 
                         <Spacer size={10} />
@@ -188,8 +251,7 @@ class AddRoom extends React.Component {
                             <Text>Choose Image from Photos</Text>
                         </Button>
                         <View style={{ padding: 10 }}>
-                            {this.state.image &&
-                                <Image source={{ uri: this.state.image }} style={{ height: 200, width: null, flex: 1 }} />}
+                            {this.state.images.length ? renderImages : null}
                         </View>
 
                         <Spacer size={10} />
