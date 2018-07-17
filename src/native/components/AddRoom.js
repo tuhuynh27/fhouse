@@ -144,7 +144,7 @@ class AddRoom extends React.Component {
         }
 
         Toast.show({
-            text: `Room posted ${valid ? "success and waiting for admin approval" : "fail"} `,
+            text: `Room posted ${valid ? "success and waiting for admin approval" : "fail, please review your form!"} `,
             duration: 3000,
             style: {
                 backgroundColor: valid ? "green" : "red"
@@ -159,8 +159,7 @@ class AddRoom extends React.Component {
 
     render() {
         const renderImages = this.state.images.map(item => (
-            // <Image source={{ uri: item }} style={{ height: 200, width: null, flex: 1 }} />
-            <Text>{item}</Text>
+            <Image key={item} source={{ uri: item }} style={{ height: 200, width: null, flex: 1 }} />
         ));
 
         const renderListUtilities = this.state.listUtilities.map(item => (

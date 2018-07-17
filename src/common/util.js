@@ -1,5 +1,5 @@
 export const normalizeStr = (str) => {
-    let betterStr = str.trim().toLowerCase();
+    const betterStr = str.trim().toLowerCase();
 
     return betterStr.charAt(0).toUpperCase() + betterStr.slice(1);
 }
@@ -13,9 +13,9 @@ export const toCurrency = (number) => {
         return "~0k";
     }
 
-    let mil = Math.floor(number / 1000000);
-    let thou = Math.floor((number - mil * 1000000) / 1000);
-    let approximate = number - mil * 1000000 - thou * 1000;
+    const mil = Math.floor(number / 1000000);
+    const thou = Math.floor((number - mil * 1000000) / 1000);
+    const approximate = number - mil * 1000000 - thou * 1000;
 
     return `${approximate ? "~" : ""}${mil ? mil + "m" : ""}${thou ? thou + "k" : ""}`;
 }

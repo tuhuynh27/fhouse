@@ -38,8 +38,8 @@ const Index = (
         swipeEnabled
         type="replace"
         showLabel={false}
-
         tabBarPosition="bottom"
+        lazy
         {...DefaultProps.tabProps}
       >
         <Stack
