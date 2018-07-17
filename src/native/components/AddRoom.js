@@ -8,6 +8,7 @@ import { Actions } from 'react-native-router-flux';
 import { normalizeStr } from '../../common/util';
 import { validatePhone, validateNumber, greaterThanZero } from '../../common/validate';
 
+import { uploadImage } from "../../actions/file"
 class AddRoom extends React.Component {
     constructor(props) {
         super(props);
@@ -62,10 +63,11 @@ class AddRoom extends React.Component {
                 allowsEditing: true,
                 aspect: [16, 9],
             });
-    
+
             if (!result.cancelled) {
+                const imageUrl = await uploadImage(result.uri);
                 let images = this.state.images;
-                images.push(result.uri)
+                images.push(imageUrl);
                 this.setState({ images });
             }
         } else {
@@ -118,7 +120,6 @@ class AddRoom extends React.Component {
     }
 
     handlePostRoom() {
-        // TODO validate
         const {
             districtSelect,
             genderSelect,
@@ -131,13 +132,13 @@ class AddRoom extends React.Component {
         } = this.state;
         let valid = false;
 
-        if (districtSelect 
-            && genderSelect 
+        if (districtSelect
+            && genderSelect
             // && images && images.length === 0 
-            && address.trim() 
+            && address.trim()
             && square && validateNumber(square) && greaterThanZero(square)
-            && price && validateNumber(price)  && greaterThanZero(price)
-            && phone && validatePhone(phone) 
+            && price && validateNumber(price) && greaterThanZero(price)
+            && phone && validatePhone(phone)
             && numOfRoomates && validateNumber(numOfRoomates) && greaterThanZero(numOfRoomates)
         ) {
             valid = true;
@@ -189,7 +190,7 @@ class AddRoom extends React.Component {
                     <Form>
                         <Item inlineLabel>
                             <Label>Address</Label>
-                            <Input value={this.state.address} onChangeText={val => this.handleChange('address', val)}/>
+                            <Input value={this.state.address} onChangeText={val => this.handleChange('address', val)} />
                         </Item>
                         <Picker
                             mode="dropdown"
@@ -207,27 +208,27 @@ class AddRoom extends React.Component {
                         </Picker>
                         <Item inlineLabel>
                             <Label>Square (in M2)</Label>
-                            <Input keyboardType="numeric" 
-                            value={this.state.addresss} 
-                            onChangeText={val => this.handleChange('square', val)} />
+                            <Input keyboardType="numeric"
+                                value={this.state.addresss}
+                                onChangeText={val => this.handleChange('square', val)} />
                         </Item>
                         <Item inlineLabel>
                             <Label>Price (in VND)</Label>
-                            <Input keyboardType="numeric" 
-                            value={this.state.price} 
-                            onChangeText={val => this.handleChange('price', val)} />
+                            <Input keyboardType="numeric"
+                                value={this.state.price}
+                                onChangeText={val => this.handleChange('price', val)} />
                         </Item>
                         <Item inlineLabel>
                             <Label>Phone Number</Label>
-                            <Input keyboardType="numeric" 
-                            value={this.state.phone} 
-                            onChangeText={val => this.handleChange('phone', val)} />
+                            <Input keyboardType="numeric"
+                                value={this.state.phone}
+                                onChangeText={val => this.handleChange('phone', val)} />
                         </Item>
                         <Item inlineLabel>
                             <Label>Number of Roomate Allow</Label>
-                            <Input keyboardType="numeric" 
-                            value={this.state.numOfRoomates} 
-                            onChangeText={val => this.handleChange('numOfRoomates', val)} />
+                            <Input keyboardType="numeric"
+                                value={this.state.numOfRoomates}
+                                onChangeText={val => this.handleChange('numOfRoomates', val)} />
                         </Item>
                         <Picker
                             mode="dropdown"
