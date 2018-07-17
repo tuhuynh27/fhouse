@@ -1,4 +1,26 @@
 import { Firebase, FirebaseRef } from '../lib/firebase';
+import uuid from 'uuid';
+
+export function addRoom(formData) {
+  const {
+    address,
+    square,
+    price,
+    phone,
+    roomates,
+    district,
+    gender,
+    images,
+    utilities,
+    equipment
+  } = formData;
+
+  formData.id = uuid.v4();
+
+  FirebaseRef.child('rooms').push(formData, (result) => {
+    console.log('Result from Firebase: ', result);
+  });
+}
 
 /**
   * Get this User's Favourite Recipes

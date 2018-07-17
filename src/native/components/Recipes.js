@@ -23,7 +23,9 @@ const RecipeListing = ({
 
   const keyExtractor = item => item.id;
 
-  const onPress = item => Actions.recipe({ match: { params: { id: String(item.id) } } });
+  const onPress = item => Actions.recipe({ match: { params: { id: item.toString() } } });
+
+  const keys = Object.keys(recipes);
 
   return (
     <Container>
@@ -43,21 +45,21 @@ const RecipeListing = ({
 
         <FlatList
           numColumns={2}
-          data={recipes}
+          data={keys}
           horizontal={false}
           renderItem={({ item }) => (
             <Card transparent style={{ paddingHorizontal: 4 }}>
               <CardItem>
-                <Text style={{ height: 40, fontWeight: '800' }}>{toTitleCase(item.address)}</Text>
+                <Text style={{ height: 40, fontWeight: '800' }}>{toTitleCase(recipes[item].address)}</Text>
               </CardItem>
               <CardItem>
                 <Icon name="pin" style={{ color: '#000' }} />
-                <Text>{item.district} Dist.</Text>
+                <Text>{recipes[item].district} Dist.</Text>
               </CardItem>
               <CardItem cardBody>
                 <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
                   <Image
-                    source={{ uri: item.images[0] }}
+                    source={{ uri: recipes[item].images[0] }}
                     style={{
                       height: 100,
                       width: null,
@@ -71,7 +73,7 @@ const RecipeListing = ({
 
               <CardItem>
                 <Icon name="pricetag" style={{ color: '#000' }} />
-                <Text>{toCurrency(item.price)}</Text>
+                <Text>{toCurrency(recipes[item].price)}</Text>
               </CardItem>
             </Card>
           )}
@@ -93,7 +95,7 @@ const RecipeListing = ({
 RecipeListing.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
-  recipes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  recipes: PropTypes.object.isRequired,
   reFetch: PropTypes.func,
 };
 

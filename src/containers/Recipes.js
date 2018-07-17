@@ -10,7 +10,7 @@ class RecipeListing extends Component {
     recipes: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
       error: PropTypes.string,
-      recipes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+      recipes: PropTypes.object.isRequired,
     }).isRequired,
     match: PropTypes.shape({
       params: PropTypes.shape({}),

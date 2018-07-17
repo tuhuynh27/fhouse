@@ -48,10 +48,7 @@ class RecipeView extends React.Component {
     if (error) return <Error content={error} />;
 
     // Get this Recipe from all recipes
-    let recipe = null;
-    if (recipeId && recipes) {
-      recipe = recipes.find(item => parseInt(item.id, 10) === parseInt(recipeId, 10));
-    }
+    const recipe = recipes[recipeId];
 
     // Recipe not found
     if (!recipe) return <Error content={ErrorMessages.recipe404} />;
@@ -147,7 +144,7 @@ class RecipeView extends React.Component {
 RecipeView.propTypes = {
   error: PropTypes.string,
   recipeId: PropTypes.string.isRequired,
-  recipes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  recipes: PropTypes.object.isRequired,
 };
 
 RecipeView.defaultProps = {

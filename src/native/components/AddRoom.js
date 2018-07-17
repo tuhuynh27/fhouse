@@ -8,7 +8,9 @@ import { Actions } from 'react-native-router-flux';
 import { normalizeStr } from '../../common/util';
 import { validatePhone, validateNumber, greaterThanZero } from '../../common/validate';
 
-import { uploadImage } from "../../actions/file"
+import { uploadImage } from '../../actions/file';
+import { addRoom } from '../../actions/recipes';
+
 class AddRoom extends React.Component {
     constructor(props) {
         super(props);
@@ -69,6 +71,15 @@ class AddRoom extends React.Component {
                 let images = this.state.images;
                 images.push(imageUrl);
                 this.setState({ images });
+            } else {
+                Toast.show({
+                    text: 'Image select cancalled!',
+                    duration: 5000,
+                    style: {
+                        backgroundColor: "yellow"
+                    },
+                    position: "top"
+                });
             }
         } else {
             Toast.show({
@@ -154,6 +165,18 @@ class AddRoom extends React.Component {
         });
 
         if (valid) {
+            addRoom({
+                address: this.state.address,
+                square: this.state.square,
+                price: this.state.price,
+                phone: this.state.phone,
+                roomates: this.state.numOfRoomates,
+                district: this.state.districtSelect,
+                gender: this.state.genderSelect,
+                images: this.state.images,
+                utilities: this.state.listUtilities,
+                equipment: this.state.listEquipments
+            });
             Actions.recipes();
         }
     }
@@ -172,7 +195,7 @@ class AddRoom extends React.Component {
 
         const renderListEquipments = this.state.listEquipments.map(item => (
             <ListItem key={item} rightIcon={{ style: { opacity: 0 } }}>
-                <CheckBox checked={true} color="blue" onPress={() => this.handleRemoveFromList('listEquipments', item)} />
+                <CheckBox checked={true} color="green" onPress={() => this.handleRemoveFromList('listEquipments', item)} />
                 <Body><Text>{normalizeStr(item)}</Text></Body>
             </ListItem>
         ));
@@ -244,7 +267,7 @@ class AddRoom extends React.Component {
                         </Picker>
 
                         <Spacer size={10} />
-                        <Text style={{ textAlign: 'left', fontWeight: 'bold' }}>Add Images</Text>
+                        <Text style={{ textAlign: 'left', fontWeight: 'bold' }}>Room Images</Text>
                         <Spacer size={10} />
 
                         <Button block rounded success onPress={() => this.handlePickImage()}>

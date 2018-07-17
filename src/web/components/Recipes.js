@@ -51,7 +51,7 @@ const RecipeListing = ({ error, loading, recipes }) => {
 RecipeListing.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
-  recipes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  recipes: PropTypes.object.isRequired,
 };
 
 RecipeListing.defaultProps = {
