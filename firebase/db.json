@@ -1,6 +1,6 @@
 {
-    "rooms": [
-        {
+    "rooms": {
+        "-LHbqBJs5Qok18DFcAar": {
             "address": "1204 Quang Trung Street",
             "city": "HCMC",
             "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
@@ -22,7 +22,7 @@
             "roomates": 2,
             "square": 25,
             "status": 0,
-            "userID": "null",
+            "userID": "V4Ecz2MyawSWWDCKCt6TG4CjV4x2",
             "utilities": [
                 "parking place",
                 "room toilet",
@@ -31,29 +31,31 @@
             ],
             "views": 0
         },
-        {
-            "address": "32 To Ky",
+        "-LHfPkPByJ0IhhWRznKr": {
+            "address": "32 To Ky phuong Trung My Tay",
             "city": "HCMC",
             "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-            "district": "Go Vap",
+            "district": "12",
             "equipment": [
                 "refrigerator",
                 "kitchen",
                 "bed"
             ],
-            "gender": "male",
+            "gender": "any",
             "id": 2,
             "images": [
+                "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-4.jpg?alt=media&token=52d5ab1a-98af-42cb-adaf-da04666a7953",
                 "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5",
-                "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-2.jpg?alt=media&token=6ed1740b-529b-4772-9a92-615e92b544b2"
+                "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-2.jpg?alt=media&token=6ed1740b-529b-4772-9a92-615e92b544b2",
+                "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5"
             ],
             "isFindRoomate": true,
             "phoneNumber": "01202751588",
-            "price": 3500000,
-            "roomates": 2,
-            "square": 25,
+            "price": 7650000,
+            "roomates": 6,
+            "square": 65,
             "status": 0,
-            "userID": "null",
+            "userID": "V4Ecz2MyawSWWDCKCt6TG4CjV4x2",
             "utilities": [
                 "parking place",
                 "room toilet",
@@ -62,5 +64,13 @@
             ],
             "views": 0
         }
-    ]
+    },
+    "users": {
+        "V4Ecz2MyawSWWDCKCt6TG4CjV4x2": {
+            "firstName": "Tu",
+            "lastLoggedIn": 1531738189305,
+            "lastName": "Huynh",
+            "signedUp": 1531736916004
+        }
+    }
 }

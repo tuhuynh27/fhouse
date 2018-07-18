@@ -6,7 +6,7 @@ export function addRoom(formData) {
     address,
     square,
     price,
-    phone,
+    phoneNumber,
     roomates,
     district,
     gender,
@@ -17,6 +17,8 @@ export function addRoom(formData) {
   } = formData;
 
   formData.id = uuid.v4();
+  formData.status = 0;
+  formData.view = 0;
 
   FirebaseRef.child('rooms').push(formData, (result) => {
     console.log('Result from Firebase: ', result);

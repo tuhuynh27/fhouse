@@ -31,7 +31,7 @@ class AddRoom extends React.Component {
             address: '',
             square: null,
             price: null,
-            phone: null,
+            phoneNumber: null,
             numOfRoomates: null,
             description: ''
         };
@@ -139,7 +139,7 @@ class AddRoom extends React.Component {
             address,
             square,
             price,
-            phone,
+            phoneNumber,
             numOfRoomates
         } = this.state;
         let valid = false;
@@ -150,7 +150,7 @@ class AddRoom extends React.Component {
             && address.trim()
             && square && validateNumber(square) && greaterThanZero(square)
             && price && validateNumber(price) && greaterThanZero(price)
-            && phone && validatePhone(phone)
+            && phoneNumber && validatePhone(phoneNumber)
             && numOfRoomates && validateNumber(numOfRoomates) && greaterThanZero(numOfRoomates)
         ) {
             valid = true;
@@ -170,7 +170,7 @@ class AddRoom extends React.Component {
                 address: this.state.address,
                 square: this.state.square,
                 price: this.state.price,
-                phone: this.state.phone,
+                phoneNumber: this.state.phoneNumber,
                 roomates: this.state.numOfRoomates,
                 district: this.state.districtSelect,
                 gender: this.state.genderSelect,
@@ -226,10 +226,23 @@ class AddRoom extends React.Component {
                             onValueChange={(v) => this.onDistrictChange(v)}
                         >
                             <Picker.Item label="Binh Thanh District" value="binh thanh" />
+                            <Picker.Item label="Binh Tan District" value="binh tan" />
                             <Picker.Item label="Phu Nhuan District" value="phu nhuan" />
                             <Picker.Item label="Tan Binh District" value="tan binh" />
                             <Picker.Item label="Tan Phu District" value="tan phu" />
                             <Picker.Item label="Thu Duc District" value="thu duc" />
+                            <Picker.Item label="1 District" value="1" />
+                            <Picker.Item label="2 District" value="2" />
+                            <Picker.Item label="3 District" value="3" />
+                            <Picker.Item label="4 District" value="4" />
+                            <Picker.Item label="5 District" value="5" />
+                            <Picker.Item label="6 District" value="6" />
+                            <Picker.Item label="7 District" value="7" />
+                            <Picker.Item label="8 District" value="8" />
+                            <Picker.Item label="9 District" value="9" />
+                            <Picker.Item label="10 District" value="10" />
+                            <Picker.Item label="11 District" value="11" />
+                            <Picker.Item label="12 District" value="12" />
                         </Picker>
                         <Item inlineLabel>
                             <Label>Square (in M2)</Label>
@@ -247,7 +260,7 @@ class AddRoom extends React.Component {
                             <Label>Phone Number</Label>
                             <Input keyboardType="numeric"
                                 value={this.state.phone}
-                                onChangeText={val => this.handleChange('phone', val)} />
+                                onChangeText={val => this.handleChange('phoneNumber', val)} />
                         </Item>
                         <Item inlineLabel>
                             <Label>Number of Roomate Allow</Label>

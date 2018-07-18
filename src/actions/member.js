@@ -45,7 +45,7 @@ export function signUp(formData) {
 /**
   * Get this User's Details
   */
-function getUserData(dispatch) {
+export function getUserData(dispatch) {
   const UID = (
     FirebaseRef
     && Firebase
@@ -68,10 +68,10 @@ function getUserData(dispatch) {
   });
 }
 
-export function getUserDataByID(uid) {
+export function getUserDataByID(uid, cb) {
   const ref = FirebaseRef.child(`users/${uid}`);
-  return ref.on('value', (snapshot) => {
-    return snapshot.val() || [];
+  ref.once('value', (snapshot) => {
+    cb(snapshot.val() || {});
   });
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, TouchableOpacity, Linking } from 'react-native';
+import { Image, Linking, ScrollView, Dimensions } from 'react-native';
 
 import { Container, Content, H3, List, ListItem, Text, Button, Tab, Tabs, Textarea, Form, Card, CardItem, Icon, Left, Body, View, CheckBox } from 'native-base';
 import ErrorMessages from '../../constants/errors';
@@ -8,26 +8,24 @@ import Error from './Error';
 import Spacer from './Spacer';
 
 import { toCurrency, toTitleCase, normalizeStr } from '../../common/util';
+import { getUserDataByID } from '../../actions/member';
+
+const { width } = Dimensions.get('window');
 
 class RecipeView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageStep: 0
+      roomMaster: 'None'
     };
   }
 
-  handleChangeImage(length) {
-    let imageStep = this.state.imageStep;
-
-    if (imageStep === length - 1) {
-      imageStep = 0;
-    } else {
-      imageStep = imageStep + 1;
-    }
-
-    this.setState({
-      imageStep: imageStep
+  componentDidMount() {
+    // Set Room Master name - get from data
+    getUserDataByID(this.props.recipes[this.props.recipeId].userID, (roomMaster) => {
+      this.setState({
+        roomMaster: roomMaster.lastName && roomMaster.lastName ? roomMaster.firstName + ' ' + roomMaster.lastName : 'Guest'
+      });
     });
   }
 
@@ -40,7 +38,6 @@ class RecipeView extends React.Component {
   }
 
   render() {
-
     // Props
     const { error, recipes, recipeId } = this.props;
 
@@ -52,6 +49,18 @@ class RecipeView extends React.Component {
 
     // Recipe not found
     if (!recipe) return <Error content={ErrorMessages.recipe404} />;
+
+    // Render images
+    const renderImages = recipe.images.map(image => (
+      <View style={{
+        width: width - 80,
+        margin: 10,
+        height: 200,
+        borderRadius: 5,
+      }} key={image}>
+        <Image style={{ flex: 1 }} source={{ uri: image }} />
+      </View>
+    ))
 
     // Build listing
     const utilities = recipe.utilities.map(item => (
@@ -67,7 +76,7 @@ class RecipeView extends React.Component {
         <Body><Text>{normalizeStr(item)}</Text></Body>
       </ListItem>
     ));
-    
+
     return (
       <Container>
         <Content padder>
@@ -77,16 +86,27 @@ class RecipeView extends React.Component {
               <H3>{toTitleCase(recipe.address)}</H3>
             </CardItem>
             <CardItem cardBody>
-              <TouchableOpacity onPress={() => this.handleChangeImage(recipe.images.length)} style={{ flex: 1 }}>
-                <Image style={{ height: 200, width: null, flex: 1 }} source={{ uri: recipe.images[this.state.imageStep] }} />
-              </TouchableOpacity>
+              <ScrollView
+                ref={(scrollView) => { this.scrollView = scrollView; }}
+                horizontal={true}
+                decelerationRate={0}
+                snapToInterval={width - 60}
+                snapToAlignment={"center"}
+                contentInset={{
+                  top: 0,
+                  left: 0,
+                  bottom: 0,
+                  right: 0,
+                }}>
+                {renderImages}
+              </ScrollView>
             </CardItem>
             <CardItem>
               <Icon name="pricetag" style={{ color: '#000' }} />
               <Text>{toCurrency(recipe.price)}</Text>
               <Spacer size={25} />
               <Icon name="person" style={{ color: '#000' }} />
-              <Text>Tu Huynh</Text>
+              <Text>{this.state.roomMaster}</Text>
             </CardItem>
           </Card>
 
@@ -94,7 +114,7 @@ class RecipeView extends React.Component {
             <Tab heading="Quick View">
               <View style={{ padding: 20 }}>
                 <Text>
-                  <Text style={{ fontWeight: 'bold' }}>Location</Text>: {recipe.district}, {recipe.city}
+                  <Text style={{ fontWeight: 'bold' }}>Location</Text>: {toTitleCase(recipe.district)} Distrcit, {recipe.city || "HCMC"}
                 </Text>
                 <Text>
                   <Text style={{ fontWeight: 'bold' }}>Accommodation</Text>: {recipe.roomates} people
@@ -130,7 +150,7 @@ class RecipeView extends React.Component {
             </Tab>
             <Tab heading="Description">
               <View style={{ padding: 20 }}>
-                <Text>{recipe.description}</Text>
+                <Text>{recipe.description || "No description"}</Text>
               </View>
             </Tab>
           </Tabs>
