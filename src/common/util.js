@@ -38,11 +38,11 @@ export const toUnsignedString = (str) => {
 }
 
 export const getLocationObj = (locationStr) => {
-    let location = locationStr.toLowerCase().replace(/, /g, ',').split(',');
+    let location = locationStr.replace(/, /g, ',').split(',');
     return {
-        ward: location[0],
-        district: location[1],
-        city: location[2],
-        country: location[3]
+        ward: location[location.length - 4],
+        district: location[location.length - 3],
+        city: location[location.length - 2],
+        country: location[location.length - 1]
     }
 }

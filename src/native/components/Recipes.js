@@ -7,7 +7,7 @@ import Loading from './Loading';
 import Error from './Error';
 import Spacer from './Spacer';
 
-import { toCurrency, toTitleCase, toUnsignedString } from '../../common/util';
+import { toCurrency, toTitleCase, toUnsignedString, getLocationObj } from '../../common/util';
 
 import { Constants, Location, Permissions } from 'expo';
 import axios from 'axios';
@@ -33,8 +33,9 @@ class RecipeListing extends React.Component {
 
       axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&sensor=false&key=${apiKey}`)
         .then(res => {
+          const locationObj = getLocationObj(toUnsignedString(res.data.results[0].formatted_address));
           this.setState({
-            address: res.data.results[0].formatted_address
+            address: locationObj
           });
         })
     }
@@ -80,14 +81,15 @@ class RecipeListing extends React.Component {
 
           <Spacer size={20} />
 
-          <Text>Your location is: {toUnsignedString(this.state.address) || "Loading..."}</Text>
-
-          <Spacer size={20} />
-
           <Button block rounded primary onPress={Actions.addRoom}>
             <Icon name="add"></Icon>
             <Text>Add New Room</Text>
           </Button>
+
+          <Spacer size={20} />
+
+          <Text style={{ fontWeight: 'bold' }}>Your district is: {(this.state.address.district) || "Loading..."}</Text>
+          <Text style={{ fontWeight: 'bold' }}>Your ward is: {(this.state.address.ward) || "Loading..."}</Text>
 
           <Spacer size={10} />
 
