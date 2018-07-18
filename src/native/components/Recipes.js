@@ -7,90 +7,139 @@ import Loading from './Loading';
 import Error from './Error';
 import Spacer from './Spacer';
 
-import { toCurrency, toTitleCase } from '../../common/util';
+import { toCurrency, toTitleCase, toUnsignedString } from '../../common/util';
 
-const RecipeListing = ({
-  error,
-  loading,
-  recipes,
-  reFetch,
-}) => {
-  // Loading
-  if (loading) return <Loading />;
+import { Constants, Location, Permissions } from 'expo';
+import axios from 'axios';
+class RecipeListing extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: '',
+      address: ''
+    };
+  }
 
-  // Error
-  if (error) return <Error content={error} />;
+  componentWillMount() {
+    this.getLocationAsync();
+  }
 
-  const keyExtractor = item => item;
+  componentWillUpdate() {
+    const { location } = this.state;
+    if (this.state.location) {
+      const lat = location.coords.latitude;
+      const long = location.coords.longitude;
+      const apiKey = 'AIzaSyAl4Jxq4xNB48094_Oqm7w_kBHnAkstnAg';
 
-  const onPress = item => Actions.recipe({ match: { params: { id: item.toString() } } });
+      axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&sensor=false&key=${apiKey}`)
+        .then(res => {
+          this.setState({
+            address: res.data.results[0].formatted_address
+          });
+        })
+    }
+  }
 
-  const keys = Object.keys(recipes);
+  getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      console.log('Permission denied!')
+    }
 
-  return (
-    <Container>
-      <Content padder>
-        <Spacer size={20} />
+    let location = await Location.getCurrentPositionAsync({});
+    this.setState({ location });
+  };
 
-        <H2 style={{ textAlign: 'center' }}>Suggested Room</H2>
+  render() {
+    // Props
+    const {
+      error,
+      loading,
+      recipes,
+      reFetch,
+    } = this.props;
 
-        <Spacer size={20} />
+    // Loading
+    if (loading) return <Loading />;
 
-        <Button block rounded primary onPress={Actions.addRoom}>
-          <Icon name="add"></Icon>
-          <Text>Add New Room</Text>
-        </Button>
+    // Error
+    if (error) return <Error content={error} />;
 
-        <Spacer size={10} />
+    const keyExtractor = item => item;
 
-        <FlatList
-          numColumns={2}
-          data={keys}
-          horizontal={false}
-          renderItem={({ item }) => (
-            <Card transparent style={{ paddingHorizontal: 4 }}>
-              <CardItem>
-                <Text style={{ height: 40, fontWeight: '800' }}>{toTitleCase(recipes[item].address)}</Text>
-              </CardItem>
-              <CardItem>
-                <Icon name="pin" style={{ color: '#000' }} />
-                <Text>{toTitleCase(recipes[item].district)} D.</Text>
-              </CardItem>
-              <CardItem cardBody>
-                <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
-                  <Image
-                    source={{ uri: recipes[item].images[0] }}
-                    style={{
-                      height: 100,
-                      width: null,
-                      flex: 1,
-                      borderRadius: 0,
-                      marginTop: 10,
-                    }}
-                  />
-                </TouchableOpacity>
-              </CardItem>
+    const onPress = item => Actions.recipe({ match: { params: { id: item.toString() } } });
 
-              <CardItem>
-                <Icon name="pricetag" style={{ color: '#000' }} />
-                <Text>{toCurrency(recipes[item].price)}</Text>
-              </CardItem>
-            </Card>
-          )}
-          keyExtractor={keyExtractor}
-          refreshControl={
-            <RefreshControl
-              refreshing={loading}
-              onRefresh={reFetch}
-            />
-          }
-        />
+    const keys = Object.keys(recipes);
 
-        <Spacer size={20} />
-      </Content>
-    </Container>
-  );
-};
+    return (
+      <Container>
+        <Content padder>
+          <Spacer size={20} />
+
+          <H2 style={{ textAlign: 'center' }}>Suggested Room</H2>
+
+          <Spacer size={20} />
+
+          <Text>Your location is: {toUnsignedString(this.state.address) || "Loading..."}</Text>
+
+          <Spacer size={20} />
+
+          <Button block rounded primary onPress={Actions.addRoom}>
+            <Icon name="add"></Icon>
+            <Text>Add New Room</Text>
+          </Button>
+
+          <Spacer size={10} />
+
+          <FlatList
+            numColumns={2}
+            data={keys}
+            horizontal={false}
+            renderItem={({ item }) => (
+              <Card transparent style={{ paddingHorizontal: 4 }}>
+                <CardItem>
+                  <Text style={{ height: 40, fontWeight: '800' }}>{toTitleCase(recipes[item].address)}</Text>
+                </CardItem>
+                <CardItem>
+                  <Icon name="pin" style={{ color: '#000' }} />
+                  <Text>{toTitleCase(recipes[item].district)} D.</Text>
+                </CardItem>
+                <CardItem cardBody>
+                  <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
+                    <Image
+                      source={{ uri: recipes[item].images[0] }}
+                      style={{
+                        height: 100,
+                        width: null,
+                        flex: 1,
+                        borderRadius: 0,
+                        marginTop: 10,
+                      }}
+                    />
+                  </TouchableOpacity>
+                </CardItem>
+
+                <CardItem>
+                  <Icon name="pricetag" style={{ color: '#000' }} />
+                  <Text>{toCurrency(recipes[item].price)}</Text>
+                </CardItem>
+              </Card>
+            )}
+            keyExtractor={keyExtractor}
+            refreshControl={
+              <RefreshControl
+                refreshing={loading}
+                onRefresh={reFetch}
+              />
+            }
+          />
+
+          <Spacer size={20} />
+        </Content>
+      </Container>
+    );
+  }
+}
 
 RecipeListing.propTypes = {
   error: PropTypes.string,

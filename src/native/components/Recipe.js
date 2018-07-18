@@ -11,12 +11,12 @@ import { toCurrency, toTitleCase, normalizeStr } from '../../common/util';
 import { getUserDataByID } from '../../actions/member';
 
 const { width } = Dimensions.get('window');
-
 class RecipeView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomMaster: 'None'
+      roomMaster: 'None',
+      location: ''
     };
   }
 
