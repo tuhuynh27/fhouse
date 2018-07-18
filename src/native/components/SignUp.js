@@ -4,7 +4,6 @@ import { Container, Content, Text, Form, Item, Label, Input, Button, View } from
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Messages from './Messages';
-import Header from './Header';
 import Spacer from './Spacer';
 
 class SignUp extends React.Component {
@@ -53,11 +52,6 @@ class SignUp extends React.Component {
     return (
       <Container>
         <Content padder>
-          {/* <Header
-            title="Welcome"
-            content="We're glad to welcome you to the community. There's only a few questions and you'll be on your way."
-          /> */}
-
           <View padder>
             <Text style={{fontWeight: 'bold'}}>
               Please fill in the form below to sign up

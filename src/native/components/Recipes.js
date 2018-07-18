@@ -54,7 +54,7 @@ const RecipeListing = ({
               </CardItem>
               <CardItem>
                 <Icon name="pin" style={{ color: '#000' }} />
-                <Text>{toTitleCase(recipes[item].district)} Dist.</Text>
+                <Text>{toTitleCase(recipes[item].district)} D.</Text>
               </CardItem>
               <CardItem cardBody>
                 <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>

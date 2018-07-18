@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Content, Text, H3, Form, Item, Label, Input, Picker, Icon, Button, List, ListItem, CheckBox, Body, Toast, Textarea } from 'native-base';
 import { View, Image } from 'react-native';
+import Error from './Error';
 import Spacer from './Spacer';
 import { ImagePicker } from 'expo';
 import { Actions } from 'react-native-router-flux';
@@ -11,6 +12,7 @@ import { validatePhone, validateNumber, greaterThanZero } from '../../common/val
 import { uploadImage } from '../../actions/file';
 import { addRoom } from '../../actions/recipes';
 
+import { connect } from 'react-redux';
 class AddRoom extends React.Component {
     constructor(props) {
         super(props);
@@ -184,6 +186,13 @@ class AddRoom extends React.Component {
     }
 
     render() {
+        // If not member
+        if (!this.props.member.email) {
+            return (
+                <Error title="Oops.." content="You are not logged in, only member can do post room." />
+            );
+        }
+
         const renderImages = this.state.images.map(item => (
             <Image key={item} source={{ uri: item }} style={{ height: 200, width: null, flex: 1 }} />
         ));
@@ -206,7 +215,7 @@ class AddRoom extends React.Component {
             <Container>
                 <Content padder>
                     <Spacer size={10} />
-                    <H3 style={{ textAlign: 'center' }}>Add Room</H3>
+                    <H3 style={{ textAlign: 'center', backgroundColor: 'violet', color: 'white', padding: 20 }}>Add Room</H3>
                     <Spacer size={10} />
 
                     <Spacer size={10} />
@@ -337,4 +346,12 @@ class AddRoom extends React.Component {
     }
 }
 
-export default AddRoom;
+const mapStateToProps = state => ({
+    member: state.member || {},
+});
+
+const mapDispatchToProps = {
+    //
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddRoom);

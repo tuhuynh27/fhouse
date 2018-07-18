@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Content, Form, Item, Label, Input, Text, Button, View, Toast } from 'native-base';
+import { Container, Content, Form, Item, Label, Input, Text, Button, View } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Messages from './Messages';
-import { translate } from '../../i18n';
-import Header from './Header';
 import Spacer from './Spacer';
+
+import { connect } from 'react-redux';
 
 class Login extends React.Component {
   static propTypes = {
@@ -45,17 +45,8 @@ class Login extends React.Component {
 
   handleSubmit = () => {
     this.props.onFormSubmit(this.state)
-      .then(() => Actions.tabbar())
+      .then(() => Actions.pop())
       .catch(e => console.log(`Error: ${e}`));
-  }
-
-  componentDidMount() {
-    Toast.show({
-      text: "Facebook login is currently not available and will be back soon!",
-      duration: 3000,
-      type: "warning",
-      position: "top"
-    });
   }
 
   render() {
@@ -112,4 +103,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default (Login);
