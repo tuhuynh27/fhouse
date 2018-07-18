@@ -29,10 +29,20 @@ export const toTitleCase = (str) => {
 }
 
 export const toUnsignedString = (str) => {
-    const signedChars = "àảãáạăằẳẵắặâầẩẫấậđèẻẽéẹêềểễếệìỉĩíịòỏõóọôồổỗốộơờởỡớợùủũúụưừửữứựỳỷỹýỵÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬĐÈẺẼÉẸÊỀỂỄẾỆÌỈĨÍỊÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢÙỦŨÚỤƯỪỬỮỨỰỲỶỸÝỴ";
+    const signedChars   = "àảãáạăằẳẵắặâầẩẫấậđèẻẽéẹêềểễếệìỉĩíịòỏõóọôồổỗốộơờởỡớợùủũúụưừửữứựỳỷỹýỵÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬĐÈẺẼÉẸÊỀỂỄẾỆÌỈĨÍỊÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢÙỦŨÚỤƯỪỬỮỨỰỲỶỸÝỴ";
     const unsignedChars = "aaaaaaaaaaaaaaaaadeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyAAAAAAAAAAAAAAAAADEEEEEEEEEEEIIIIIOOOOOOOOOOOOOOOOOUUUUUUUUUUUYYYYY";
     const pattern = new RegExp("[" + signedChars + "]", "g");
     return output = str.replace(pattern, function (m, key, value) {
         return unsignedChars.charAt(signedChars.indexOf(m));
     });
+}
+
+export const getLocationObj = (locationStr) => {
+    let location = locationStr.toLowerCase().replace(/, /g, ',').split(',');
+    return {
+        ward: location[0],
+        district: location[1],
+        city: location[2],
+        country: location[3]
+    }
 }
