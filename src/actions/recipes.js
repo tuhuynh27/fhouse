@@ -12,7 +12,8 @@ export function addRoom(formData) {
     gender,
     images,
     utilities,
-    equipment
+    equipment,
+    description
   } = formData;
 
   formData.id = uuid.v4();

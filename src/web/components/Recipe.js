@@ -93,7 +93,7 @@ RecipeView.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   recipeId: PropTypes.string.isRequired,
-  recipes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  recipes: PropTypes.object.isRequired,
 };
 
 RecipeView.defaultProps = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Content, Text, H3, Form, Item, Label, Input, Picker, Icon, Button, List, ListItem, CheckBox, Body, Toast } from 'native-base';
+import { Container, Content, Text, H3, Form, Item, Label, Input, Picker, Icon, Button, List, ListItem, CheckBox, Body, Toast, Textarea } from 'native-base';
 import { View, Image } from 'react-native';
 import Spacer from './Spacer';
 import { ImagePicker } from 'expo';
@@ -32,7 +32,8 @@ class AddRoom extends React.Component {
             square: null,
             price: null,
             phone: null,
-            numOfRoomates: null
+            numOfRoomates: null,
+            description: ''
         };
     }
 
@@ -175,7 +176,8 @@ class AddRoom extends React.Component {
                 gender: this.state.genderSelect,
                 images: this.state.images,
                 utilities: this.state.listUtilities,
-                equipment: this.state.listEquipments
+                equipment: this.state.listEquipments,
+                description: this.state.description
             });
             Actions.recipes();
         }
@@ -306,15 +308,13 @@ class AddRoom extends React.Component {
                             <Icon name="add"></Icon>
                             <Text>Add</Text>
                         </Button>
+
+                        <Spacer size={10} />
+                        <Text style={{ textAlign: 'left', fontWeight: 'bold' }}>Add Description</Text>
+                        <Spacer size={10} />
+                        <Textarea rowSpan={5} bordered placeholder="Some more thing about this room..." onChangeText={v => this.handleChange('description', v)} />
                     </Form>
-                    <View
-                        style={{
-                            borderBottomColor: '#ccc',
-                            borderBottomWidth: 1,
-                            marginTop: 20,
-                            marginBottom: 20
-                        }}
-                    />
+                    <Spacer size={10} />
                     <Button block primary onPress={() => this.handlePostRoom()}>
                         <Text>Post this room!!</Text>
                     </Button>

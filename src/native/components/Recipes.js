@@ -21,7 +21,7 @@ const RecipeListing = ({
   // Error
   if (error) return <Error content={error} />;
 
-  const keyExtractor = item => item.id;
+  const keyExtractor = item => item;
 
   const onPress = item => Actions.recipe({ match: { params: { id: item.toString() } } });
 
@@ -54,7 +54,7 @@ const RecipeListing = ({
               </CardItem>
               <CardItem>
                 <Icon name="pin" style={{ color: '#000' }} />
-                <Text>{recipes[item].district} Dist.</Text>
+                <Text>{toTitleCase(recipes[item].district)} Dist.</Text>
               </CardItem>
               <CardItem cardBody>
                 <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
