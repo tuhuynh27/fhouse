@@ -40,9 +40,10 @@ export const toUnsignedString = (str) => {
 export const getLocationObj = (locationStr) => {
     let location = locationStr.replace(/, /g, ',').split(',');
     return {
-        ward: location[location.length - 4],
-        district: location[location.length - 3],
-        city: location[location.length - 2],
-        country: location[location.length - 1]
+        street: location[location.length - 5] || '',
+        ward: location[location.length - 4] || 'Ba Chieu',
+        district: location[location.length - 3] || 'Binh Thanh',
+        city: location[location.length - 2] || 'HCMC',
+        country: location[location.length - 1] || 'Vietnam'
     }
 }

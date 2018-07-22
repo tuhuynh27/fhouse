@@ -1,6 +1,6 @@
 import React from 'react';
-import { Scene, Tabs, Stack } from 'react-native-router-flux';
-import { Icon } from 'native-base';
+import { Scene, Tabs, Stack, Actions } from 'react-native-router-flux';
+import { Icon, Button } from 'native-base';
 
 import DefaultProps from '../constants/navigation';
 import AppConfig from '../../constants/config';
@@ -30,6 +30,10 @@ import ProfileComponent from '../components/Profile';
 import AboutComponent from '../components/About';
 import AddRoomComponent from '../components/AddRoom';
 
+const onAddRoom = () => {
+  Actions.addRoom();
+}
+
 const Index = (
   <Stack>
     <Scene hideNavBar>
@@ -39,7 +43,7 @@ const Index = (
         type="replace"
         showLabel={false}
         tabBarPosition="bottom"
-        lazy
+        lazy={true}
         {...DefaultProps.tabProps}
       >
         <Stack
@@ -54,12 +58,16 @@ const Index = (
 
         <Stack
           key="recipes"
-          title="FEATURE ROOM"
+          title="Rooms"
           icon={() => <Icon name="list" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="recipes" component={RecipesContainer} Layout={RecipesComponent} />
-          <Scene key="addRoom" component={AddRoomComponent} />
+          <Scene key="recipes" title="SUGGESTED ROOM" component={RecipesContainer} Layout={RecipesComponent}
+            renderRightButton={<Button transparent onPress={() => onAddRoom()}><Icon name="add" style={{ marginRight: 20 }} /> </Button>}
+            renderLeftButton={<Button transparent><Icon name="search" style={{ marginLeft: 20 }} /></Button>}
+          />
+          <Scene key="addRoom" title="NEW ROOM" hideTabBar={true} component={AddRoomComponent}
+          />
         </Stack>
 
         <Stack
@@ -130,6 +138,7 @@ const Index = (
       {...DefaultProps.navbarProps}
       component={RecipesContainer}
       Layout={RecipeViewComponent}
+      renderRightButton={<Button transparent><Icon name="heart" style={{ color: 'red' }} /></Button>}
     />
   </Stack>
 );

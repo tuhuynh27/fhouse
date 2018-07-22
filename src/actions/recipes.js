@@ -13,7 +13,8 @@ export function addRoom(formData) {
     images,
     utilities,
     equipment,
-    description
+    description,
+    userID
   } = formData;
 
   formData.id = uuid.v4();

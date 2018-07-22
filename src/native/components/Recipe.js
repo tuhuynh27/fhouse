@@ -78,10 +78,9 @@ class RecipeView extends React.Component {
     ));
 
     return (
-      <Container>
+      <Container style={{ backgroundColor: 'white' }}>
         <Content padder>
-
-          <Card style={{ elevation: 3 }}>
+          <Card transparent style={{ elevation: 3 }}>
             <CardItem>
               <H3>{toTitleCase(recipe.address)}</H3>
             </CardItem>
@@ -114,7 +113,7 @@ class RecipeView extends React.Component {
             <Tab heading="Quick View">
               <View style={{ padding: 20 }}>
                 <Text>
-                  <Text style={{ fontWeight: 'bold' }}>Location</Text>: {toTitleCase(recipe.district)} Distrcit, {recipe.city || "HCMC"}
+                  <Text style={{ fontWeight: 'bold' }}>Location</Text>: {toTitleCase(recipe.district)} District, {recipe.city || "HCMC"}
                 </Text>
                 <Text>
                   <Text style={{ fontWeight: 'bold' }}>Accommodation</Text>: {recipe.roomates} people
