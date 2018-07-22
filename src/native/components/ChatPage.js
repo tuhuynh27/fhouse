@@ -43,7 +43,7 @@ export default class Chat extends React.Component {
       case "find me any room": case "find any room":
         this.onBot(`Sure! Please wait, I'm finding.`);
         setTimeout(() => {
-          this.onBot('Here there is a nearby room at 32 To Ky, Trung My Tay, 12 District. The square is 25m2 and cost 2m5 VND per month, here is the phone number: 01216870446.');
+          this.onBot('Here there is a nearby room at 40/7D To 28 Kp2, Trung My Tay, 12 District. The square is 25m2 and cost 2m5 VND per month, here is the phone number: 01216870446.');
         }, 4000);
         break;
       case "thanks": case "thank you":
@@ -84,6 +84,8 @@ export default class Chat extends React.Component {
         user={{
           _id: 1,
         }}
+        alwaysShowSend={true}
+        isAnimated={true}
       />
     )
   }

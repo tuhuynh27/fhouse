@@ -20,7 +20,7 @@ const About = () => (
           onPress={Actions.recipes}
         >
           <Icon name="arrow-dropright-circle"></Icon>
-          <Text>View best room for you</Text>
+          <Text>View rooms and add to favorite</Text>
         </Button>
       </ImageBackground>
     </Content>

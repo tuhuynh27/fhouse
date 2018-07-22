@@ -1,7 +1,6 @@
 import React from 'react';
-import { Container, Content, Text, H3, Form, Item, Label, Input, Picker, Icon, Button, List, ListItem, CheckBox, Body, Toast, Textarea } from 'native-base';
-import { View, Image, ActivityIndicator } from 'react-native';
-import Error from './Error';
+import { Container, Content, Text, Form, Item, Label, Input, Picker, Icon, Button, List, ListItem, CheckBox, Body, Toast, Textarea } from 'native-base';
+import { View, Image, ActivityIndicator, Platform } from 'react-native';
 import Spacer from './Spacer';
 import { ImagePicker } from 'expo';
 import { Actions } from 'react-native-router-flux';
@@ -269,6 +268,7 @@ class AddRoom extends React.Component {
             <Item picker>
               <Picker
                 mode="dropdown"
+                style={{ width: (Platform.OS === 'ios') ? undefined : 200 }}
                 placeholder="Select district"
                 iosHeader="Select district"
                 iosIcon={<Icon name="ios-arrow-down-outline" />}
@@ -326,6 +326,7 @@ class AddRoom extends React.Component {
             <Item picker>
               <Picker
                 mode="dropdown"
+                style={{ width: (Platform.OS === 'ios') ? undefined : 200 }}
                 placeholder="Select gender"
                 iosHeader="Select gender"
                 iosIcon={<Icon name="ios-arrow-down-outline" />}

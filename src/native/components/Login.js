@@ -6,6 +6,8 @@ import Loading from './Loading';
 import Messages from './Messages';
 import Spacer from './Spacer';
 
+import { connect } from 'react-redux';
+
 class Login extends React.Component {
   static propTypes = {
     member: PropTypes.shape({
@@ -34,6 +36,13 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    // If member
+    if (this.props.member.email) {
+      Actions.profileHome();
+    }
+  }
+
   handleChange = (name, val) => {
     this.setState({
       ...this.state,
@@ -43,12 +52,12 @@ class Login extends React.Component {
 
   handleSubmit = () => {
     this.props.onFormSubmit(this.state)
-      .then(() => Actions.pop())
+      .then(() => { Actions.profileHome(); })
       .catch(e => console.log(`Error: ${e}`));
   }
 
   render() {
-    const { loading, error, locale } = this.props;
+    const { loading, error } = this.props;
 
     if (loading) return <Loading />;
 
@@ -97,4 +106,12 @@ class Login extends React.Component {
   }
 }
 
-export default (Login);
+const mapStateToProps = state => ({
+  member: state.member || {},
+});
+
+const mapDispatchToProps = {
+  //
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

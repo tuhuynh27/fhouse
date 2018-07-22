@@ -1,6 +1,6 @@
 import React from 'react';
 import { Scene, Tabs, Stack, Actions } from 'react-native-router-flux';
-import { Icon, Button } from 'native-base';
+import { Icon, Button, Toast } from 'native-base';
 
 import DefaultProps from '../constants/navigation';
 import AppConfig from '../../constants/config';
@@ -56,6 +56,8 @@ const Index = (
           <Scene key="recipes" title="SUGGESTED ROOM" component={RecipesContainer} Layout={RecipesComponent}
             renderRightButton={<Button transparent onPress={() => onAddRoom()}><Icon name="add" style={{ marginRight: 20 }} /></Button>}
             renderLeftButton={<Button transparent><Icon name="search" style={{ marginLeft: 20 }} /></Button>}
+            navigationBarTitleImage={require('../../images/app-icon.png')}
+            navigationBarTitleImageStyle={{ display: 'flex', width: 35, height: 35, alignSelf: 'center', alignContent: 'center', alignItems: 'center', justifyContent: 'center' }}
           />
           <Scene key="addRoom" title="NEW ROOM" hideTabBar={true} component={AddRoomComponent}
           />
@@ -77,7 +79,7 @@ const Index = (
           icon={() => <Icon name="chatbubbles" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="chat" component={ChatComponent}/>
+          <Scene key="chat" component={ChatComponent} />
         </Stack>
 
         <Stack
@@ -139,7 +141,7 @@ const Index = (
       {...DefaultProps.navbarProps}
       component={RecipesContainer}
       Layout={RecipeViewComponent}
-      renderRightButton={<Button transparent><Icon name="heart" style={{ color: 'red' }} /></Button>}
+      renderRightButton={<Button transparent><Icon name="heart" style={{ color: '#4656b0' }} /></Button>}
     />
   </Stack>
 );

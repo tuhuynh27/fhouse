@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, TouchableOpacity, RefreshControl, Image } from 'react-native';
-import { Container, Content, Card, CardItem, Text, Icon, H2, Button, Picker, View } from 'native-base';
+import { FlatList, TouchableOpacity, RefreshControl, Image, Platform } from 'react-native';
+import { Container, Content, Card, CardItem, Text, Icon, Picker, View, Form, Item } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Error from './Error';
@@ -16,6 +16,7 @@ class RecipeListing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      keys: Object.keys(props.recipes).reverse(),
       address: '',
       districtSelect: 'all'
     };
@@ -44,15 +45,36 @@ class RecipeListing extends React.Component {
 
           this.setState({
             address: locationObj,
-            districtSelect: locationObj.district.replace(/Quan /g, "") || 'all'
+            districtSelect: locationObj.district.replace(/Quan /g, "").trim().toLowerCase() || 'all'
           });
+
+          this.districtFilter(locationObj.district.replace(/Quan /g, "").trim().toLowerCase() || 'all');
+
+          console.log('Ahihi: ', locationObj.district.replace(/Quan /g, "").trim().toLowerCase());
         });
     }
   };
 
   onDistrictChange(value) {
+    this.districtFilter(value);
+
     this.setState({
       districtSelect: value
+    });
+  }
+
+  districtFilter(value) {
+    const { recipes } = this.props;
+    let keys = Object.keys(this.props.recipes).reverse();
+
+    if (value !== 'all') {
+      keys = keys.filter((key) => {
+        return recipes[key].district.trim().toLowerCase() == value;
+      });
+    }
+
+    this.setState({
+      keys
     });
   }
 
@@ -75,7 +97,7 @@ class RecipeListing extends React.Component {
 
     const onPress = item => Actions.recipe({ match: { params: { id: item.toString() } } });
 
-    const keys = Object.keys(recipes);
+    const { keys } = this.state;
 
     return (
       <Container>
@@ -85,41 +107,48 @@ class RecipeListing extends React.Component {
           <Text>You are at <Text style={{ fontWeight: 'bold' }}>{(this.state.address.street) || "Somewhere"}, {(this.state.address.ward) || "Loading..."} Ward</Text></Text>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text>Show rooms at </Text>
-            <Picker
-              mode="dropdown"
-              placeholder="Select district"
-              iosHeader="Select district"
-              iosIcon={<Icon name="ios-arrow-down-outline" />}
-              headerBackButtonTextStyle={{ color: 'red' }}
-              headerStyle={{ backgroundColor: "#b95dd3" }}
-              headerBackButtonTextStyle={{ color: "#fff" }}
-              headerTitleStyle={{ color: "#fff" }}
-              selectedValue={this.state.districtSelect}
-              onValueChange={(v) => this.onDistrictChange(v)}
-            >
-              <Picker.Item label="All District" value="all" />
-              <Picker.Item label="Binh Thanh District" value="binh thanh" />
-              <Picker.Item label="Binh Tan District" value="binh tan" />
-              <Picker.Item label="Phu Nhuan District" value="phu nhuan" />
-              <Picker.Item label="Tan Binh District" value="tan binh" />
-              <Picker.Item label="Tan Phu District" value="tan phu" />
-              <Picker.Item label="Thu Duc District" value="thu duc" />
-              <Picker.Item label="1 District" value="1" />
-              <Picker.Item label="2 District" value="2" />
-              <Picker.Item label="3 District" value="3" />
-              <Picker.Item label="4 District" value="4" />
-              <Picker.Item label="5 District" value="5" />
-              <Picker.Item label="6 District" value="6" />
-              <Picker.Item label="7 District" value="7" />
-              <Picker.Item label="8 District" value="8" />
-              <Picker.Item label="9 District" value="9" />
-              <Picker.Item label="10 District" value="10" />
-              <Picker.Item label="11 District" value="11" />
-              <Picker.Item label="12 District" value="12" />
-            </Picker>
+            <Form>
+              <Item picker>
+                <Picker
+                  mode="dropdown"
+                  placeholder="Select district"
+                  style={{ width: (Platform.OS === 'ios') ? undefined : 200 }}
+                  iosHeader="Select district"
+                  iosIcon={<Icon name="ios-arrow-down-outline" />}
+                  headerBackButtonTextStyle={{ color: 'red' }}
+                  headerStyle={{ backgroundColor: "#b95dd3" }}
+                  headerBackButtonTextStyle={{ color: "#fff" }}
+                  headerTitleStyle={{ color: "#fff" }}
+                  selectedValue={this.state.districtSelect}
+                  onValueChange={(v) => this.onDistrictChange(v)}
+                >
+                  <Picker.Item label="All District" value="all" />
+                  <Picker.Item label="Binh Thanh District" value="binh thanh" />
+                  <Picker.Item label="Binh Tan District" value="binh tan" />
+                  <Picker.Item label="Phu Nhuan District" value="phu nhuan" />
+                  <Picker.Item label="Tan Binh District" value="tan binh" />
+                  <Picker.Item label="Tan Phu District" value="tan phu" />
+                  <Picker.Item label="Thu Duc District" value="thu duc" />
+                  <Picker.Item label="1 District" value="1" />
+                  <Picker.Item label="2 District" value="2" />
+                  <Picker.Item label="3 District" value="3" />
+                  <Picker.Item label="4 District" value="4" />
+                  <Picker.Item label="5 District" value="5" />
+                  <Picker.Item label="6 District" value="6" />
+                  <Picker.Item label="7 District" value="7" />
+                  <Picker.Item label="8 District" value="8" />
+                  <Picker.Item label="9 District" value="9" />
+                  <Picker.Item label="10 District" value="10" />
+                  <Picker.Item label="11 District" value="11" />
+                  <Picker.Item label="12 District" value="12" />
+                </Picker>
+              </Item>
+            </Form>
           </View>
 
           <Spacer size={10} />
+
+          {keys.length === 0 && <Image source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/fhouse-app.appspot.com/o/NoRoom.png?alt=media&token=4b6ab009-ce5f-46b6-b6d1-7b054534e47e' }} style={{ display: 'flex', height: 350 }}></Image>}
 
           <FlatList
             numColumns={1}

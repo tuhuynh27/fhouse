@@ -6,6 +6,8 @@ import Loading from './Loading';
 import Messages from './Messages';
 import Spacer from './Spacer';
 
+import { connect } from 'react-redux';
+
 class SignUp extends React.Component {
   static propTypes = {
     error: PropTypes.string,
@@ -31,6 +33,13 @@ class SignUp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    // If member
+    if (this.props.member.email) {
+      Actions.profileHome();
+    }
+  }
+
   handleChange = (name, val) => {
     this.setState({
       ...this.state,
@@ -53,7 +62,7 @@ class SignUp extends React.Component {
       <Container>
         <Content padder>
           <View padder>
-            <Text style={{fontWeight: 'bold'}}>
+            <Text style={{ fontWeight: 'bold' }}>
               Please fill in the form below to sign up
             </Text>
           </View>
@@ -102,4 +111,12 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+const mapStateToProps = state => ({
+  member: state.member || {},
+});
+
+const mapDispatchToProps = {
+  //
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
