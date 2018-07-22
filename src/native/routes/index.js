@@ -54,7 +54,7 @@ const Index = (
           {...DefaultProps.navbarProps}
         >
           <Scene key="recipes" title="SUGGESTED ROOM" component={RecipesContainer} Layout={RecipesComponent}
-            renderRightButton={<Button transparent onPress={() => onAddRoom()}><Icon name="add" style={{ marginRight: 20 }} /> </Button>}
+            renderRightButton={<Button transparent onPress={() => onAddRoom()}><Icon name="add" style={{ marginRight: 20 }} /></Button>}
             renderLeftButton={<Button transparent><Icon name="search" style={{ marginLeft: 20 }} /></Button>}
           />
           <Scene key="addRoom" title="NEW ROOM" hideTabBar={true} component={AddRoomComponent}
