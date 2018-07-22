@@ -1,5 +1,6 @@
 import { Firebase, FirebaseRef } from '../lib/firebase';
 import uuid from 'uuid';
+import moment from 'moment';
 
 export function addRoom(formData) {
   const {
@@ -18,6 +19,7 @@ export function addRoom(formData) {
   } = formData;
 
   formData.id = uuid.v4();
+  formData.time = moment().unix();
   formData.status = 0;
   formData.view = 0;
 

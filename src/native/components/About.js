@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Content, Button, Icon, Text } from 'native-base';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 // Device height

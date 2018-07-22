@@ -30,6 +30,8 @@ import ProfileComponent from '../components/Profile';
 import AboutComponent from '../components/About';
 import AddRoomComponent from '../components/AddRoom';
 
+import ChatComponent from '../components/ChatPage';
+
 const onAddRoom = () => {
   Actions.addRoom();
 }
@@ -43,23 +45,12 @@ const Index = (
         type="replace"
         showLabel={false}
         tabBarPosition="bottom"
-        lazy={true}
         {...DefaultProps.tabProps}
       >
         <Stack
-          hideNavBar
-          key="home"
-          title={AppConfig.appName.toUpperCase()}
-          icon={() => <Icon name="home" {...DefaultProps.icons} />}
-          {...DefaultProps.navbarProps}
-        >
-          <Scene key="home" component={AboutComponent} />
-        </Stack>
-
-        <Stack
           key="recipes"
           title="Rooms"
-          icon={() => <Icon name="list" {...DefaultProps.icons} />}
+          icon={() => <Icon name="home" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
           <Scene key="recipes" title="SUGGESTED ROOM" component={RecipesContainer} Layout={RecipesComponent}
@@ -71,12 +62,22 @@ const Index = (
         </Stack>
 
         <Stack
+          hideNavBar
+          key="love"
+          title={AppConfig.appName.toUpperCase()}
+          icon={() => <Icon name="heart" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="love" component={AboutComponent} />
+        </Stack>
+
+        <Stack
           key="chat"
-          title="CHAT"
+          title="F-HOUSE SUPPORT"
           icon={() => <Icon name="chatbubbles" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
+          <Scene key="chat" component={ChatComponent}/>
         </Stack>
 
         <Stack

@@ -65,7 +65,7 @@ class RecipeView extends React.Component {
     // Build listing
     const utilities = recipe.utilities.map(item => (
       <ListItem key={item} rightIcon={{ style: { opacity: 0 } }}>
-        <CheckBox checked={true} color="blue" />
+        <CheckBox checked={true} color="violet" />
         <Body><Text>{normalizeStr(item)}</Text></Body>
       </ListItem>
     ));
@@ -79,7 +79,7 @@ class RecipeView extends React.Component {
 
     return (
       <Container style={{ backgroundColor: 'white' }}>
-        <Content padder>
+        <Content>
           <Card transparent style={{ elevation: 3 }}>
             <CardItem>
               <H3>{toTitleCase(recipe.address)}</H3>

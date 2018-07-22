@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { View, ImageBackground } from 'react-native';
 import { Container, Content, List, ListItem, Body, Left, Text, Icon, Card, CardItem, Right, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import Header from './Header';
 
 // Device height
 import { Dimensions } from "react-native";
@@ -16,11 +15,9 @@ const Profile = ({ member, logout }) => (
       <List>
         {(member && member.email) ?
           <View>
-            <Content padder>
-              <Header
-                title={`Hi ${member.firstName},`}
-                content={`You are currently logged in as ${member.email}`}
-              />
+            <Content padder scrollEnabled={false} style={{marginLeft: 50}}>
+              <Text style={{ fontWeight: 'bold', fontSize: 30, marginBottom: 10 }}>{member.firstName} {member.lastName}</Text>
+              <Text style={{ marginBottom: 20 }}>Ho Chi Minh City</Text>
             </Content>
 
             <ListItem onPress={Actions.updateProfile} icon>
@@ -42,13 +39,6 @@ const Profile = ({ member, logout }) => (
           </View>
           :
           <View>
-            {/* <Content padder>
-              <Header
-                title="Hi there,"
-                content="Please login to gain extra access"
-              />
-            </Content> */}
-
             <ImageBackground
               style={{ width: '100%', height: deviceHeight }}
               source={require("../../images/feature.jpg")}
@@ -61,31 +51,6 @@ const Profile = ({ member, logout }) => (
                 <Text>Login with Facebook</Text>
               </Button>
             </ImageBackground>
-
-            {/* <ListItem onPress={Actions.login} icon>
-              <Left>
-                <Icon name="power" />
-              </Left>
-              <Body>
-                <Text>Login</Text>
-              </Body>
-            </ListItem>
-            <ListItem onPress={Actions.signUp} icon>
-              <Left>
-                <Icon name="add-circle" />
-              </Left>
-              <Body>
-                <Text>Sign Up</Text>
-              </Body>
-            </ListItem>
-            <ListItem onPress={Actions.forgotPassword} icon>
-              <Left>
-                <Icon name="help-buoy" />
-              </Left>
-              <Body>
-                <Text>Forgot Password</Text>
-              </Body>
-            </ListItem> */}
           </View>
         }
       </List>

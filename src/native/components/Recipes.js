@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FlatList, TouchableOpacity, RefreshControl, Image } from 'react-native';
-import { Container, Content, Card, CardItem, Text, Icon, H2, Button, Picker } from 'native-base';
+import { Container, Content, Card, CardItem, Text, Icon, H2, Button, Picker, View } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Error from './Error';
@@ -11,6 +11,7 @@ import { toCurrency, toTitleCase, toUnsignedString, getLocationObj } from '../..
 
 import { Location, Permissions } from 'expo';
 import axios from 'axios';
+import moment from 'moment';
 class RecipeListing extends React.Component {
   constructor(props) {
     super(props);
@@ -82,57 +83,66 @@ class RecipeListing extends React.Component {
           <Spacer size={20} />
 
           <Text>You are at <Text style={{ fontWeight: 'bold' }}>{(this.state.address.street) || "Somewhere"}, {(this.state.address.ward) || "Loading..."} Ward</Text></Text>
-          <Picker
-            mode="dropdown"
-            placeholder="Select district"
-            iosHeader="Select district"
-            iosIcon={<Icon name="pin" />}
-            style={{ width: null }}
-            selectedValue={this.state.districtSelect}
-            onValueChange={(v) => this.onDistrictChange(v)}
-          >
-            <Picker.Item label="All District" value="all" />
-            <Picker.Item label="Binh Thanh District" value="binh thanh" />
-            <Picker.Item label="Binh Tan District" value="binh tan" />
-            <Picker.Item label="Phu Nhuan District" value="phu nhuan" />
-            <Picker.Item label="Tan Binh District" value="tan binh" />
-            <Picker.Item label="Tan Phu District" value="tan phu" />
-            <Picker.Item label="Thu Duc District" value="thu duc" />
-            <Picker.Item label="1 District" value="1" />
-            <Picker.Item label="2 District" value="2" />
-            <Picker.Item label="3 District" value="3" />
-            <Picker.Item label="4 District" value="4" />
-            <Picker.Item label="5 District" value="5" />
-            <Picker.Item label="6 District" value="6" />
-            <Picker.Item label="7 District" value="7" />
-            <Picker.Item label="8 District" value="8" />
-            <Picker.Item label="9 District" value="9" />
-            <Picker.Item label="10 District" value="10" />
-            <Picker.Item label="11 District" value="11" />
-            <Picker.Item label="12 District" value="12" />
-          </Picker>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text>Show rooms at </Text>
+            <Picker
+              mode="dropdown"
+              placeholder="Select district"
+              iosHeader="Select district"
+              iosIcon={<Icon name="ios-arrow-down-outline" />}
+              headerBackButtonTextStyle={{ color: 'red' }}
+              headerStyle={{ backgroundColor: "#b95dd3" }}
+              headerBackButtonTextStyle={{ color: "#fff" }}
+              headerTitleStyle={{ color: "#fff" }}
+              selectedValue={this.state.districtSelect}
+              onValueChange={(v) => this.onDistrictChange(v)}
+            >
+              <Picker.Item label="All District" value="all" />
+              <Picker.Item label="Binh Thanh District" value="binh thanh" />
+              <Picker.Item label="Binh Tan District" value="binh tan" />
+              <Picker.Item label="Phu Nhuan District" value="phu nhuan" />
+              <Picker.Item label="Tan Binh District" value="tan binh" />
+              <Picker.Item label="Tan Phu District" value="tan phu" />
+              <Picker.Item label="Thu Duc District" value="thu duc" />
+              <Picker.Item label="1 District" value="1" />
+              <Picker.Item label="2 District" value="2" />
+              <Picker.Item label="3 District" value="3" />
+              <Picker.Item label="4 District" value="4" />
+              <Picker.Item label="5 District" value="5" />
+              <Picker.Item label="6 District" value="6" />
+              <Picker.Item label="7 District" value="7" />
+              <Picker.Item label="8 District" value="8" />
+              <Picker.Item label="9 District" value="9" />
+              <Picker.Item label="10 District" value="10" />
+              <Picker.Item label="11 District" value="11" />
+              <Picker.Item label="12 District" value="12" />
+            </Picker>
+          </View>
 
           <Spacer size={10} />
 
           <FlatList
-            numColumns={2}
+            numColumns={1}
             data={keys}
             horizontal={false}
             renderItem={({ item }) => (
-              <Card transparent style={{ paddingHorizontal: 4, borderRadius: 0}}>
+              <Card transparent style={{ paddingHorizontal: 0, paddingVertical: 5, borderRadius: 0 }}>
                 <CardItem>
-                  <Text style={{ height: 40, fontWeight: '800' }}>{toTitleCase(recipes[item].address)}</Text>
+                  <Text style={{ fontWeight: '800', fontSize: 22 }}>{toTitleCase(recipes[item].address)}</Text>
                 </CardItem>
                 <CardItem>
-                  <Icon name="pin" style={{ color: '#000' }} />
-                  <Text>{toTitleCase(recipes[item].district)} D.</Text>
+                  <Icon name="pin" style={{ color: '#000', fontSize: 20 }} />
+                  <Text>{toTitleCase(recipes[item].district)} District</Text>
+                  <Spacer size={25} />
+                  <Icon name="cube" style={{ color: '#000', fontSize: 20 }} />
+                  <Text>{recipes[item].square} m2</Text>
                 </CardItem>
                 <CardItem cardBody>
                   <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
                     <Image
                       source={{ uri: recipes[item].images[0] }}
                       style={{
-                        height: 100,
+                        height: 200,
                         width: null,
                         flex: 1,
                         borderRadius: 0,
@@ -143,8 +153,11 @@ class RecipeListing extends React.Component {
                 </CardItem>
 
                 <CardItem>
-                  <Icon name="pricetag" style={{ color: '#000' }} />
+                  <Icon name="logo-usd" style={{ color: '#000', fontSize: 20 }} />
                   <Text>{toCurrency(recipes[item].price)}</Text>
+                  <Spacer size={25} />
+                  <Icon name="time" style={{ color: '#000', fontSize: 20 }} />
+                  <Text>{moment().add(moment().unix() - recipes[item].time, 'seconds').fromNow()}</Text>
                 </CardItem>
               </Card>
             )}

@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Content, Form, Item, Label, Input, Text, Button, View } from 'native-base';
+import { Container, Content, Form, Item, Input, Text, Button, View } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Messages from './Messages';
 import Spacer from './Spacer';
-
-import { connect } from 'react-redux';
 
 class Login extends React.Component {
   static propTypes = {
@@ -58,10 +56,6 @@ class Login extends React.Component {
       <Container>
         <Content>
           <View padder>
-            {/* <Header
-              title="Welcome back"
-              content="Please use your email and password to login."
-            /> */}
             {error && <Messages message={error} />}
           </View>
 

@@ -44,8 +44,12 @@ class AddRoom extends React.Component {
     };
   }
 
-  componenDidMount() {
-    navigation.setParams({ title: 'New Room' })
+  componentDidMount() {
+    // If not member
+    if (!this.props.member.email) {
+      Actions.pop();
+      Actions.login();
+    }
   }
 
   componentWillMount() {
@@ -233,13 +237,6 @@ class AddRoom extends React.Component {
   }
 
   render() {
-    // If not member
-    if (!this.props.member.email) {
-      return (
-        <Error title="Oops.." content="You are not logged in, only member can do post room." />
-      );
-    }
-
     const renderImages = this.state.images.map(item => (
       <Image key={item} source={{ uri: item }} style={{ height: 200, width: null, flex: 1, marginBottom: 10 }} />
     ));
