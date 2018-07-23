@@ -27,8 +27,6 @@ class RecipeListing extends React.Component {
     // Prop
     const { error, loading, recipes } = this.props;
 
-    console.log('is Admin: ', this.props.member);
-
     // If not logged in
     if (!this.props.member.isAdmin) {
       return (
