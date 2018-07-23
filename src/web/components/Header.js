@@ -49,7 +49,7 @@ class Header extends Component {
       <header>
         <Navbar dark color="primary" expand="sm" className="fixed-top">
           <Link to="/" className="navbar-brand" style={{ color: '#FFF' }}>
-            <img src="http://sv1.upsieutoc.com/2018/07/08/Logo.png" style={{maxWidth: "32px", marginRight: "10px" }} />
+            <img src="https://firebasestorage.googleapis.com/v0/b/fhouse-app.appspot.com/o/app-icon.png?alt=media&token=12915b42-378a-42c0-9e86-9575e9bddff7" style={{maxWidth: "32px", marginRight: "10px" }} />
             {Config.appName}
           </Link>
           <NavbarToggler onClick={this.toggleDropDown} />
@@ -60,7 +60,7 @@ class Header extends Component {
               </div>
               <UncontrolledDropdown nav>
                 <DropdownToggle nav caret>
-                  {loggedIn ? `Hi, ${member.firstName}` : 'My Account'}
+                  {loggedIn ? `Hi, ${member.firstName}` : 'You are not logged in'}
                 </DropdownToggle>
                 <DropdownMenu>
                   {!loggedIn &&

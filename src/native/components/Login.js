@@ -7,7 +7,6 @@ import Messages from './Messages';
 import Spacer from './Spacer';
 
 import { connect } from 'react-redux';
-
 class Login extends React.Component {
   static propTypes = {
     member: PropTypes.shape({

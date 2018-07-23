@@ -28,6 +28,16 @@ export function addRoom(formData) {
   });
 }
 
+export function approveRoom(id, approveCode) {
+  return FirebaseRef.child(`rooms/${id}`).update({ isApproved: approveCode })
+    .then(() => {
+      // Success
+      return {
+        status: 'ok'
+      };
+    }).catch(reject);
+}
+
 /**
   * Get this User's Favourite Recipes
   */

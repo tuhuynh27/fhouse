@@ -13,6 +13,7 @@ export default function userReducer(state = initialState, action) {
           uid: action.data.uid,
           email: action.data.email,
           emailVerified: action.data.emailVerified,
+          isAdmin: action.data.isAdmin || false,
         };
       }
       return initialState;
@@ -27,6 +28,7 @@ export default function userReducer(state = initialState, action) {
           lastName: action.data.lastName,
           signedUp: action.data.signedUp,
           role: action.data.role,
+          isAdmin: action.data.isAdmin || false,
         };
       }
       return initialState;

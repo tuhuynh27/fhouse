@@ -69,6 +69,7 @@
     "react-native": "^0.54.2",
     "react-native-gifted-chat": "^0.4.3",
     "react-native-router-flux": "4.0.0-beta.28",
+    "react-native-slider": "^0.11.0",
     "react-native-ui-kitten": "^3.0.1",
     "react-native-viewpager": "^0.2.13",
     "react-redux": "^5.0.7",

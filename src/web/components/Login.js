@@ -80,7 +80,7 @@ class Login extends React.Component {
                       type="email"
                       name="email"
                       id="email"
-                      placeholder="name@gosu.team"
+                      placeholder="name@fhouse.gosu.team"
                       value={this.state.email}
                       onChange={this.handleChange}
                     />

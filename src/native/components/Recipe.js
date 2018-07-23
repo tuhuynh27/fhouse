@@ -15,7 +15,7 @@ class RecipeView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomMaster: 'None',
+      roomMaster: 'Guest',
       location: ''
     };
   }
@@ -116,7 +116,7 @@ class RecipeView extends React.Component {
                   <Text style={{ fontWeight: 'bold' }}>Location</Text>: {toTitleCase(recipe.district)} District, {recipe.city || "HCMC"}
                 </Text>
                 <Text>
-                  <Text style={{ fontWeight: 'bold' }}>Accommodation</Text>: {recipe.roomates} people
+                  <Text style={{ fontWeight: 'bold' }}>Current roomates</Text>: {recipe.roomates} people
                 </Text>
                 <Text>
                   <Text style={{ fontWeight: 'bold' }}>Gender</Text>: For {normalizeStr(recipe.gender)}

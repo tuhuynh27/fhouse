@@ -12,17 +12,12 @@ const SidebarNavItems = () => (
     </NavItem>
     <NavItem>
       <Link className={`nav-link ${window.location.pathname.startsWith('/recipe') && 'active'}`} to="/recipes">
-        <i className="icon-notebook" /> <span>Recipes</span>
+        <i className="icon-grid" /> <span>Rooms</span>
       </Link>
     </NavItem>
     <NavItem>
-      <Link className={`nav-link ${window.location.pathname.startsWith('/add') && 'active'}`} to="/recipes">
-        <i className="icon-grid" /> <span>Dashboard</span>
-      </Link>
-    </NavItem>
-    <NavItem>
-      <Link className={`nav-link ${window.location.pathname.startsWith('/document') && 'active'}`} to="/recipes">
-        <i className="icon-docs" /> <span>Documents</span>
+      <Link className={`nav-link ${window.location.pathname.startsWith('/account') && 'active'}`} to="/recipes">
+        <i className="icon-people" /> <span>Accounts</span>
       </Link>
     </NavItem>
   </div>

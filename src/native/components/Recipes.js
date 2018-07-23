@@ -49,8 +49,6 @@ class RecipeListing extends React.Component {
           });
 
           this.districtFilter(locationObj.district.replace(/Quan /g, "").trim().toLowerCase() || 'all');
-
-          console.log('Ahihi: ', locationObj.district.replace(/Quan /g, "").trim().toLowerCase());
         });
     }
   };
@@ -104,7 +102,7 @@ class RecipeListing extends React.Component {
         <Content padder>
           <Spacer size={20} />
 
-          <Text>You are at <Text style={{ fontWeight: 'bold' }}>{(this.state.address.street) || "Somewhere"}, {(this.state.address.ward) || "Loading..."} Ward</Text></Text>
+          <Text>You are at <Text style={{ fontWeight: 'bold' }}>{(this.state.address.street) || "Somewhere"}, {(this.state.address.ward) || "Loading..."}</Text></Text>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text>Show rooms at </Text>
             <Form>

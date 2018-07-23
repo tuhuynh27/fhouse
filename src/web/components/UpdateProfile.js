@@ -149,7 +149,6 @@ class UpdateProfile extends React.Component {
                           type="password"
                           name="password"
                           id="password"
-                          placeholder="••••••••"
                           value={this.state.password}
                           onChange={this.handleChange}
                         />
@@ -160,7 +159,6 @@ class UpdateProfile extends React.Component {
                           type="password"
                           name="password2"
                           id="password2"
-                          placeholder="••••••••"
                           value={this.state.password2}
                           onChange={this.handleChange}
                         />
