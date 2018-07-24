@@ -94,7 +94,7 @@ const Index = (
           icon={() => <Icon name="people" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
+          <Scene key="profileHome" hideNavBar component={MemberContainer} Layout={ProfileComponent} />
           <Scene
             back
             key="signUp"

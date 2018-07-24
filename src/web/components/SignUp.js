@@ -79,7 +79,7 @@ class SignUp extends React.Component {
                       type="text"
                       name="firstName"
                       id="firstName"
-                      placeholder="Tu"
+                      placeholder="John"
                       value={this.state.firstName}
                       onChange={this.handleChange}
                     />
@@ -90,7 +90,7 @@ class SignUp extends React.Component {
                       type="text"
                       name="lastName"
                       id="lastName"
-                      placeholder="Huynh"
+                      placeholder="Smith"
                       value={this.state.lastName}
                       onChange={this.handleChange}
                     />
@@ -102,7 +102,7 @@ class SignUp extends React.Component {
                       type="email"
                       name="email"
                       id="email"
-                      placeholder="tu.huynh@gosu.team"
+                      placeholder="name@fhouse.gosu.team"
                       value={this.state.email}
                       onChange={this.handleChange}
                     />

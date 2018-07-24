@@ -36,6 +36,7 @@ export function signUp(formData) {
             lastName,
             signedUp: Firebase.database.ServerValue.TIMESTAMP,
             lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
+            email
           }).then(() => statusMessage(dispatch, 'loading', false).then(resolve));
         }
       }).catch(reject);
@@ -230,7 +231,7 @@ export function logout() {
 
 export function addFavoriteRoom(roomId, cb) {
   const userID = Firebase.auth().currentUser.uid;
-  
+
   getUserDataByID(userID, (user) => {
     let favoriteRoom = user.favoriteRoom || [];
 
@@ -249,5 +250,33 @@ export function addFavoriteRoom(roomId, cb) {
         })
       });
   });
+}
 
+export function getListAccount(cb) {
+  FirebaseRef.child('users')
+    .on('value', (snapshot) => {
+      const accounts = snapshot.val() || {};
+
+      cb(accounts);
+    });
+}
+
+export function setAdmin(id) {
+  return FirebaseRef.child(`users/${id}`).update({ isAdmin: true })
+    .then(() => {
+      // Success
+      return {
+        status: 'ok'
+      };
+    }).catch(reject);
+}
+
+export function unsetAdmin(id) {
+  return FirebaseRef.child(`users/${id}`).update({ isAdmin: false })
+    .then(() => {
+      // Success
+      return {
+        status: 'ok'
+      };
+    }).catch(reject);
 }

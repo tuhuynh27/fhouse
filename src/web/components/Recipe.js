@@ -148,7 +148,7 @@ class RecipeView extends React.Component {
         </Row>
         <Row className="pb-3" style={{ marginTop: '20px' }}>
           <Col sm="12">
-            <Link className="btn btn-secondary" to="/recipes"><i className="icon-arrow-left" /> Back</Link>
+            <Link className="btn btn-secondary" to="/rooms"><i className="icon-arrow-left" /> Back</Link>
           </Col>
         </Row>
       </div >

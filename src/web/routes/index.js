@@ -24,6 +24,8 @@ import ForgotPasswordComponent from '../components/ForgotPassword';
 import UpdateProfileContainer from '../../containers/UpdateProfile';
 import UpdateProfileComponent from '../components/UpdateProfile';
 
+import AccountComponent from '../components/Accounts';
+
 import Error from '../components/Error';
 
 const Index = () => (
@@ -70,7 +72,7 @@ const Index = () => (
       )}
     />
     <Route
-      path="/recipes"
+      path="/rooms"
       render={props => (
         <TemplateSidebar>
           <RecipesContainer {...props} Layout={RecipesComponent} />
@@ -78,10 +80,18 @@ const Index = () => (
       )}
     />
     <Route
-      path="/recipe/:id"
+      path="/room/:id"
       render={props => (
         <TemplateSidebar>
           <RecipesContainer {...props} Layout={RecipeViewComponent} />
+        </TemplateSidebar>
+      )}
+    />
+    <Route
+      path="/accounts"
+      render={props => (
+        <TemplateSidebar>
+          <RecipesContainer {...props} Layout={AccountComponent} />
         </TemplateSidebar>
       )}
     />

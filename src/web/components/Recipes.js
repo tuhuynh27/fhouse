@@ -47,13 +47,13 @@ class RecipeListing extends React.Component {
     // Build Cards for Listing
     const cards = keys.map(item => (
       <Card key={item}>
-        <Link to={`/recipe/${item}`}>
+        <Link to={`/room/${item}`}>
           <CardImg top src={recipes[item].images[0]} />
         </Link>
         <CardBody>
           <CardTitle>{toTitleCase(recipes[item].address)}</CardTitle>
           <CardText>{toTitleCase(recipes[item].district)} District</CardText>
-          <Link className="btn btn-primary" to={`/recipe/${item}`}>View Room <i className="icon-arrow-right" /></Link>
+          <Link className="btn btn-primary" to={`/room/${item}`}>View Room <i className="icon-arrow-right" /></Link>
         </CardBody>
       </Card>
     ));
