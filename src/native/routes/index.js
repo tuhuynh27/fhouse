@@ -65,13 +65,13 @@ const Index = (
             navigationBarTitleImage={require('../../images/app-icon.png')}
             navigationBarTitleImageStyle={{ display: 'flex', width: 35, height: 35, alignSelf: 'center', alignContent: 'center', alignItems: 'center', justifyContent: 'center' }}
           />
-          <Scene key="addRoom" title="NEW ROOM" hideTabBar={true} component={AddRoomComponent}
+          <Scene key="addRoom" title="FIND ROOMATES" hideTabBar={true} component={AddRoomComponent}
           />
           <Scene key="searchRoom" title="SEARCH ROOM" hideTabBar={true} component={SearchComponent}></Scene>
         </Stack>
 
         <Stack
-          key="love"
+          key="favorite"
           title="FAVORITE ROOMS"
           icon={() => <Icon name="heart" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}

@@ -15,6 +15,7 @@ import { toTitleCase } from '../../common/util';
 
 import { connect } from 'react-redux';
 
+import moment from 'moment';
 class RecipeListing extends React.Component {
   constructor(props) {
     super(props);
@@ -52,8 +53,9 @@ class RecipeListing extends React.Component {
         </Link>
         <CardBody>
           <CardTitle>{toTitleCase(recipes[item].address)}</CardTitle>
-          <CardText>{toTitleCase(recipes[item].district)} District</CardText>
-          <Link className="btn btn-primary" to={`/room/${item}`}>View Room <i className="icon-arrow-right" /></Link>
+          <CardText>{toTitleCase(recipes[item].district)} District, HCMC</CardText>
+          <CardText>Posted {moment().add(moment().unix() - recipes[item].time, 'seconds').fromNow()}</CardText>
+          <Link className="btn btn-primary" to={`/room/${item}`}>Review This Room <i className="icon-arrow-right" /></Link>
         </CardBody>
       </Card>
     ));
@@ -65,7 +67,7 @@ class RecipeListing extends React.Component {
           <Col sm="12">
             <h1>Rooms</h1>
             <p>Show all rooms need to approval.</p>
-            {cards.length === 0 && <p>There's no room need to approval.</p> }
+            {cards.length === 0 && <p>There's no room need to approval.</p>}
           </Col>
         </Row>
         <Row className={loading ? 'content-loading' : ''}>

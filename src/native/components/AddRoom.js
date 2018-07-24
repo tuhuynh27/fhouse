@@ -318,7 +318,7 @@ class AddRoom extends React.Component {
                 onChangeText={val => this.handleChange('phoneNumber', val)} />
             </Item>
             <Item stackedLabel>
-              <Label>Number of Roomate Allow</Label>
+              <Label>Current People in Room</Label>
               <Input keyboardType="numeric"
                 value={this.state.numOfRoomates}
                 onChangeText={val => this.handleChange('numOfRoomates', val)} />

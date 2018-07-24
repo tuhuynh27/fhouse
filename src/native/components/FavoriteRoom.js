@@ -29,7 +29,7 @@ class FavoriteRoom extends React.Component {
 
     const keyExtractor = item => item;
     const onPress = item => Actions.recipe({ match: { params: { id: item.toString() } } });
-    const keys = favoriteRoom;
+    const keys = favoriteRoom.reverse();
     const { recipes } = this.props;
 
     return (

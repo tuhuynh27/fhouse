@@ -60,6 +60,7 @@ class RecipeView extends React.Component {
           },
           position: "top"
         });
+        Actions.pop();
       } else {
         Toast.show({
           text: 'Added to favorite room!',
@@ -69,6 +70,8 @@ class RecipeView extends React.Component {
           },
           position: "top"
         });
+        Actions.pop();
+        Actions.favorite();
       }
     });
   }

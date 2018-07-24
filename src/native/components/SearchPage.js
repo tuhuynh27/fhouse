@@ -11,6 +11,7 @@ import { toCurrency, toTitleCase } from '../../common/util';
 import moment from 'moment';
 
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
 class SearchPage extends React.Component {
   constructor(props) {
@@ -51,6 +52,10 @@ class SearchPage extends React.Component {
 
     this.setState({
       keys
+    });
+
+    Actions.refresh({
+      title: 'RESULT: ' + keys.length + ' ROOM(S)'
     });
   }
 
