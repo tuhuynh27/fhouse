@@ -1,0 +1,81 @@
+[debug] [2018-07-24T03:34:20.158Z] ----------------------------------------------------------------------
+[debug] [2018-07-24T03:34:20.160Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2018-07-24T03:34:20.161Z] CLI Version:   3.19.3
+[debug] [2018-07-24T03:34:20.161Z] Platform:      darwin
+[debug] [2018-07-24T03:34:20.161Z] Node Version:  v8.11.3
+[debug] [2018-07-24T03:34:20.161Z] Time:          Tue Jul 24 2018 10:34:20 GMT+0700 (+07)
+[debug] [2018-07-24T03:34:20.161Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-07-24T03:34:20.173Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2018-07-24T03:34:20.174Z] > authorizing via signed-in user
+[info] 
+     🔥🔥🔥🔥🔥🔥🔥🔥 🔥🔥🔥🔥 🔥🔥🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥🔥🔥 🔥🔥🔥🔥🔥🔥🔥🔥     🔥🔥🔥     🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥🔥🔥
+     🔥🔥        🔥🔥  🔥🔥     🔥🔥 🔥🔥       🔥🔥     🔥🔥  🔥🔥   🔥🔥  🔥🔥       🔥🔥
+     🔥🔥🔥🔥🔥🔥    🔥🔥  🔥🔥🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥   🔥🔥🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥
+     🔥🔥        🔥🔥  🔥🔥    🔥🔥  🔥🔥       🔥🔥     🔥🔥 🔥🔥     🔥🔥       🔥🔥 🔥🔥
+     🔥🔥       🔥🔥🔥🔥 🔥🔥     🔥🔥 🔥🔥🔥🔥🔥🔥🔥🔥 🔥🔥🔥🔥🔥🔥🔥🔥  🔥🔥     🔥🔥  🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥🔥🔥
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/tuhuynh/Desktop/FHouse
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2018-07-24T03:34:22.153Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-07-24T03:34:22.154Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/JMBf-nFvVVK80q_7AkPxUeQx1wFD38-EZncA22x2EnU',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Jul 24 2018 10:34:22 GMT+0700 (+07)
+[debug] [2018-07-24T03:34:22.409Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-24T03:34:22.417Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects  
+  
+ Tue Jul 24 2018 10:34:22 GMT+0700 (+07)
+[debug] [2018-07-24T03:34:23.624Z] <<< HTTP RESPONSE 200
+[info] i  .firebaserc already has a default project, skipping
+[info] 
+=== Functions Setup
+[info] 
+[info] A functions directory will be created in your project with a Node.js
+[info] package pre-configured. Functions can be deployed with firebase deploy.
+[info] 
+[debug] [2018-07-24T03:34:23.626Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-07-24T03:34:23.627Z] > authorizing via signed-in user
+[debug] [2018-07-24T03:34:23.627Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-07-24T03:34:23.628Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/JMBf-nFvVVK80q_7AkPxUeQx1wFD38-EZncA22x2EnU',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Jul 24 2018 10:34:23 GMT+0700 (+07)
+[debug] [2018-07-24T03:34:23.794Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-24T03:34:23.801Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/fhouse-app  
+  
+ Tue Jul 24 2018 10:34:23 GMT+0700 (+07)
+[debug] [2018-07-24T03:34:24.635Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-24T03:34:24.636Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/fhouse-app/tokens  
+  
+ Tue Jul 24 2018 10:34:24 GMT+0700 (+07)
+[debug] [2018-07-24T03:34:25.610Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-24T03:34:25.613Z] >>> HTTP REQUEST PATCH https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/fhouse-app?updateMask=usageSettings  
+ { usageSettings: { consumerEnableStatus: 'ENABLED' } } 
+ Tue Jul 24 2018 10:34:25 GMT+0700 (+07)
+[debug] [2018-07-24T03:34:25.614Z] >>> HTTP REQUEST PATCH https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/fhouse-app?updateMask=usageSettings  
+ { usageSettings: { consumerEnableStatus: 'ENABLED' } } 
+ Tue Jul 24 2018 10:34:25 GMT+0700 (+07)
+[debug] [2018-07-24T03:34:27.491Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-24T03:34:27.803Z] <<< HTTP RESPONSE 200
+[info] ✔  Wrote functions/package.json
+[info] ✔  Wrote functions/index.js

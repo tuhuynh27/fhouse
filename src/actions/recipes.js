@@ -1,5 +1,4 @@
 import { Firebase, FirebaseRef } from '../lib/firebase';
-import uuid from 'uuid';
 import moment from 'moment';
 
 export function addRoom(formData) {
@@ -18,7 +17,6 @@ export function addRoom(formData) {
     userID
   } = formData;
 
-  formData.id = uuid.v4();
   formData.time = moment().unix();
   formData.status = 0;
   formData.view = 0;
@@ -82,24 +80,6 @@ export function replaceFavourites(newFavourites) {
 }
 
 /**
-  * Get Meals
-  */
-export function getMeals() {
-  if (Firebase === null) return () => new Promise(resolve => resolve());
-
-  return dispatch => new Promise((resolve, reject) => FirebaseRef
-    .child('meals').once('value')
-    .then((snapshot) => {
-      const meals = snapshot.val() || {};
-
-      return resolve(dispatch({
-        type: 'MEALS_REPLACE',
-        data: meals,
-      }));
-    }).catch(reject)).catch(e => console.log(e));
-}
-
-/**
   * Set an Error Message
   */
 export function setError(message) {
@@ -115,7 +95,7 @@ export function setError(message) {
 export function getRecipes() {
   if (Firebase === null) return () => new Promise(resolve => resolve());
 
-  return dispatch => new Promise(resolve => FirebaseRef.child('rooms')
+  return dispatch => new Promise(resolve => FirebaseRef.child('rooms').orderByChild('time')
     .on('value', (snapshot) => {
       const recipes = snapshot.val() || {};
 

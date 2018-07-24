@@ -16,7 +16,7 @@ const About = () => (
         style={{ width: '100%', height: deviceHeight }}
       >
         <Button success
-          style={{ position: 'absolute', bottom: deviceHeight / 10, left: 40 }}
+          style={{ position: 'absolute', bottom: deviceHeight / 5, left: 40 }}
           onPress={Actions.recipes}
         >
           <Icon name="arrow-dropright-circle"></Icon>

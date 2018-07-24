@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Image, Linking, ScrollView, Dimensions } from 'react-native';
 
-import { Container, Content, H3, List, ListItem, Text, Button, Tab, Tabs, Textarea, Form, Card, CardItem, Icon, Left, Body, View, CheckBox } from 'native-base';
+import { Container, Content, H3, List, ListItem, Text, Button, Tab, Tabs, Textarea, Form, Card, CardItem, Icon, Left, Body, View, CheckBox, Toast } from 'native-base';
 import ErrorMessages from '../../constants/errors';
 import Error from './Error';
 import Spacer from './Spacer';
 
 import { toCurrency, toTitleCase, normalizeStr } from '../../common/util';
-import { getUserDataByID } from '../../actions/member';
+import { getUserDataByID, addFavoriteRoom } from '../../actions/member';
+
+import { Actions } from 'react-native-router-flux';
 
 const { width } = Dimensions.get('window');
 class RecipeView extends React.Component {
@@ -26,6 +28,35 @@ class RecipeView extends React.Component {
       this.setState({
         roomMaster: roomMaster.lastName && roomMaster.lastName ? roomMaster.firstName + ' ' + roomMaster.lastName : 'Guest'
       });
+    });
+
+    Actions.refresh({
+      title: 'Room in ' + toTitleCase(this.props.recipes[this.props.recipeId].district) + ' District',
+      right: (<Button transparent onPress={() => this.addToFavorite(this.props.recipeId)}><Icon name="heart" style={{ color: '#4656b0' }} /></Button>)
+    });
+  }
+
+  addToFavorite(id) {
+    addFavoriteRoom(id, (result) => {
+      if (result.isAdd) {
+        Toast.show({
+          text: 'Removed from favorite room!',
+          duration: 1000,
+          style: {
+            backgroundColor: "orange"
+          },
+          position: "top"
+        });
+      } else {
+        Toast.show({
+          text: 'Added to favorite room!',
+          duration: 1000,
+          style: {
+            backgroundColor: "violet"
+          },
+          position: "top"
+        });
+      }
     });
   }
 

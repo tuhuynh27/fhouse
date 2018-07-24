@@ -16,7 +16,6 @@ class RecipeListing extends Component {
       params: PropTypes.shape({}),
     }),
     getRecipes: PropTypes.func.isRequired,
-    getMeals: PropTypes.func.isRequired,
     setError: PropTypes.func.isRequired,
   }
 
@@ -31,7 +30,7 @@ class RecipeListing extends Component {
     */
   fetchRecipes = () => {
     return this.props.getRecipes()
-      .then(() => this.props.getMeals())
+      .then()
       .catch((err) => {
         console.log(`Error: ${err}`);
         return this.props.setError(err);
@@ -60,7 +59,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getRecipes,
-  getMeals,
   setError,
 };
 

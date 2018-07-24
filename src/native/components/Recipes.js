@@ -15,8 +15,15 @@ import moment from 'moment';
 class RecipeListing extends React.Component {
   constructor(props) {
     super(props);
+
+    let keys = Object.keys(props.recipes).reverse();
+
+    keys = keys.filter((key) => {
+      return props.recipes[key].isApproved == 1;
+    });
+
     this.state = {
-      keys: Object.keys(props.recipes).reverse(),
+      keys: keys,
       address: '',
       districtSelect: 'all'
     };
@@ -65,9 +72,36 @@ class RecipeListing extends React.Component {
     const { recipes } = this.props;
     let keys = Object.keys(this.props.recipes).reverse();
 
+    keys = keys.filter((key) => {
+      return this.props.recipes[key].isApproved == 1;
+    });
+
     if (value !== 'all') {
       keys = keys.filter((key) => {
         return recipes[key].district.trim().toLowerCase() == value;
+      });
+    }
+
+    this.setState({
+      keys
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.recipes === nextProps.recipes) {
+      return;
+    }
+
+    const { districtSelect } = this.state;
+    let keys = Object.keys(nextProps.recipes).reverse();
+
+    keys = keys.filter((key) => {
+      return nextProps.recipes[key].isApproved == 1;
+    });
+
+    if (districtSelect !== 'all') {
+      keys = keys.filter((key) => {
+        return nextProps.recipes[key].district.trim().toLowerCase() == districtSelect;
       });
     }
 
@@ -193,6 +227,7 @@ class RecipeListing extends React.Component {
               <RefreshControl
                 refreshing={loading}
                 onRefresh={reFetch}
+                enabled={true}
               />
             }
           />

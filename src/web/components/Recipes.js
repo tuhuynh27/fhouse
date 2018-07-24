@@ -64,7 +64,8 @@ class RecipeListing extends React.Component {
         <Row>
           <Col sm="12">
             <h1>Rooms</h1>
-            <p>Show all rooms in database.</p>
+            <p>Show all rooms need to approval.</p>
+            {cards.length === 0 && <p>There's no room need to approval.</p> }
           </Col>
         </Row>
         <Row className={loading ? 'content-loading' : ''}>

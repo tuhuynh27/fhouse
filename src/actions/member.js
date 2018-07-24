@@ -227,3 +227,31 @@ export function logout() {
       }).catch(reject);
   }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
 }
+
+export function addFavoriteRoom(roomId, cb) {
+  const userID = Firebase.auth().currentUser.uid;
+
+  if (!userID) {
+    return;
+  }
+
+  getUserDataByID(userID, (user) => {
+    let favoriteRoom = user.favoriteRoom || [];
+
+    const findRoom = favoriteRoom.indexOf(roomId);
+
+    if (findRoom === -1) {
+      favoriteRoom.push(roomId);
+    } else {
+      favoriteRoom.splice(findRoom, 1);
+    }
+
+    FirebaseRef.child(`users/${userID}`).update({ favoriteRoom })
+      .then(() => {
+        cb({
+          isAdd: !(findRoom === -1)
+        })
+      });
+  });
+
+}

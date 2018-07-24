@@ -108,8 +108,8 @@ class RecipeView extends React.Component {
           <Col sm="12">
             <h1>{toTitleCase(recipe.address)}, {toTitleCase(recipe.district)}</h1>
             <p>by <strong>{this.state.roomMaster}</strong>, {moment().add(moment().unix() - recipe.time, 'seconds').fromNow()}</p>
-            {recipe.isApproved === 0 && <p>This room is <strong>pending</strong>. Please <Button color="primary" size="sm" onClick={() => this.handleApproveRoom(recipeId, 1)}>Approve</Button> or <Button color="danger" size="sm" onClick={() => this.handleApproveRoom(recipeId, 2)}>Reject</Button> this room. </p>}
-            {recipe.isApproved !== 0 && <p>This room is <strong>{recipe.isApproved === 1 ? "approved" : "rejected" }</strong> by admin.</p>}
+            {(recipe.isApproved == 0 || !recipe.isApproved) && <p>This room is <strong>pending</strong>. Please <Button color="primary" size="sm" onClick={() => this.handleApproveRoom(recipeId, 1)}>Approve</Button> or <Button color="danger" size="sm" onClick={() => this.handleApproveRoom(recipeId, 2)}>Reject</Button> this room. </p>}
+            {(recipe.isApproved == 1 || recipe.isApproved == 2) && <p>This room is <strong>{recipe.isApproved === 1 ? "approved" : "rejected" }</strong> by admin.</p>}
           </Col>
         </Row>
         <Row>
