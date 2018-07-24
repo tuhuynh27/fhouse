@@ -230,11 +230,7 @@ export function logout() {
 
 export function addFavoriteRoom(roomId, cb) {
   const userID = Firebase.auth().currentUser.uid;
-
-  if (!userID) {
-    return;
-  }
-
+  
   getUserDataByID(userID, (user) => {
     let favoriteRoom = user.favoriteRoom || [];
 

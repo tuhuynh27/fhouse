@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FlatList, TouchableOpacity, RefreshControl, Image } from 'react-native';
+import { FlatList, TouchableOpacity, Image } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Icon } from 'native-base';
 
 import NoFavoriteRoom from './About';

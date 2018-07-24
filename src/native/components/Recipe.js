@@ -10,6 +10,7 @@ import Spacer from './Spacer';
 import { toCurrency, toTitleCase, normalizeStr } from '../../common/util';
 import { getUserDataByID, addFavoriteRoom } from '../../actions/member';
 
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 const { width } = Dimensions.get('window');
@@ -37,6 +38,18 @@ class RecipeView extends React.Component {
   }
 
   addToFavorite(id) {
+    if (!this.props.member.email) {
+      Toast.show({
+        text: 'Please login to use add to favorite!',
+        duration: 2000,
+        style: {
+          backgroundColor: "red"
+        },
+        position: "top"
+      });
+      return;
+    }
+
     addFavoriteRoom(id, (result) => {
       if (result.isAdd) {
         Toast.show({
@@ -201,4 +214,12 @@ RecipeView.defaultProps = {
   error: null,
 };
 
-export default RecipeView;
+const mapStateToProps = state => ({
+  member: state.member || {},
+});
+
+const mapDispatchToProps = {
+  //
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeView);
