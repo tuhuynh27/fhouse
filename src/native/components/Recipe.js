@@ -9,6 +9,7 @@ import Spacer from './Spacer';
 
 import { toCurrency, toTitleCase, normalizeStr } from '../../common/util';
 import { getUserDataByID, addFavoriteRoom } from '../../actions/member';
+import { hideRoom, unhideRoom } from "../../actions/recipes";
 
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -31,10 +32,16 @@ class RecipeView extends React.Component {
       });
     });
 
-    Actions.refresh({
-      title: 'Room in ' + toTitleCase(this.props.recipes[this.props.recipeId].district) + ' District',
-      right: (<Button transparent onPress={() => this.addToFavorite(this.props.recipeId)}><Icon name="heart" style={{ color: '#4656b0' }} /></Button>)
-    });
+    if (this.props.recipes[this.props.recipeId].userID === this.props.member.uid) {
+      Actions.refresh({
+        title: 'My Posted Room',
+      });
+    } else {
+      Actions.refresh({
+        title: 'Room in ' + toTitleCase(this.props.recipes[this.props.recipeId].district) + ' District',
+        right: (<Button transparent onPress={() => this.addToFavorite(this.props.recipeId)}><Icon name="heart" style={{ color: '#4656b0' }} /></Button>)
+      });
+    }
   }
 
   addToFavorite(id) {
@@ -82,6 +89,34 @@ class RecipeView extends React.Component {
 
   handleMakeSMS(phoneNumber) {
     Linking.openURL(`sms:${phoneNumber}`);
+  }
+
+  handleHideRoom(id) {
+    hideRoom(id);
+
+    Toast.show({
+      text: 'Success hide the room!',
+      duration: 1000,
+      style: {
+        backgroundColor: "orange"
+      },
+      position: "top"
+    });
+    Actions.pop();
+  }
+
+  handleUnhideRoom(id) {
+    unhideRoom(id);
+
+    Toast.show({
+      text: 'Success un-hide the room!',
+      duration: 1000,
+      style: {
+        backgroundColor: "violet"
+      },
+      position: "top"
+    });
+    Actions.pop();
   }
 
   render() {
@@ -172,7 +207,19 @@ class RecipeView extends React.Component {
                   <Text style={{ fontWeight: 'bold' }}>Room Square</Text>: {recipe.square} m2
                 </Text>
                 <Spacer size={20} />
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                {recipe.userID === this.props.member.uid && recipe.status !== true && <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
+                  <Button success onPress={() => this.handleHideRoom(this.props.recipeId)}>
+                    <Icon name="checkbox" />
+                    <Text>Hide this room</Text>
+                  </Button>
+                </View>}
+                {recipe.userID === this.props.member.uid && recipe.status === true && <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
+                  <Button light onPress={() => this.handleUnhideRoom(this.props.recipeId)}>
+                    <Icon name="cloud-upload" />
+                    <Text>Unhide This Room</Text>
+                  </Button>
+                </View>}
+                {recipe.userID !== this.props.member.uid && <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                   <Button info style={{ width: '45%', alignItems: 'center', justifyContent: 'center' }} onPress={() => this.handleMakeCall(recipe.phoneNumber)}>
                     <Icon name='call' />
                     <Text>Call</Text>
@@ -181,7 +228,7 @@ class RecipeView extends React.Component {
                     <Icon name='text' />
                     <Text>SMS</Text>
                   </Button>
-                </View>
+                </View>}
               </View>
             </Tab>
             <Tab heading="Utilities">

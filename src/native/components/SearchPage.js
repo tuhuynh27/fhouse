@@ -17,7 +17,7 @@ class SearchPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      keys: Object.keys(props.recipes),
+      keys: Object.keys(props.recipes).reverse(),
       value: 0.25,
       squareValue: 0.1,
       districtSelect: 'all'
@@ -30,7 +30,7 @@ class SearchPage extends React.Component {
 
   filterRoom() {
     const { recipes } = this.props;
-    let keys = Object.keys(recipes);
+    let keys = Object.keys(recipes).reverse();
     const tenmil = 10000000;
 
     // Filter district
@@ -40,9 +40,9 @@ class SearchPage extends React.Component {
       });
     }
 
-    // Filter isApprove & price
+    // Filter isApprove & price & hide
     keys = keys.filter((key) => {
-      return recipes[key].isApproved == 1 && (recipes[key].price < this.state.value * tenmil);
+      return recipes[key].isApproved == 1 && recipes[key].status != true && (recipes[key].price < this.state.value * tenmil);
     });
 
     // Filter square
@@ -83,7 +83,7 @@ class SearchPage extends React.Component {
           />
 
           <Text>
-            Price range max to <Text style={{ fontWeight: 'bold' }}>{toCurrency(this.state.value * 10000000)}</Text>VND
+            Maximum Price to <Text style={{ fontWeight: 'bold' }}>{toCurrency(this.state.value * 10000000)}</Text>VND
             </Text>
 
           <Slider
@@ -93,7 +93,7 @@ class SearchPage extends React.Component {
           />
 
           <Text>
-            {this.state.squareValue * 100 <= 10 && "No square minimum, scroll the bar to set."}
+            {this.state.squareValue * 100 <= 10 && "Room square minimum, scroll the bar to set"}
             {this.state.squareValue * 100 > 10 && <Text>Square minimum at <Text style={{ fontWeight: 'bold' }}>{Math.round(this.state.squareValue * 100)}</Text>m2</Text>}
 
           </Text>

@@ -33,7 +33,27 @@ export function approveRoom(id, approveCode) {
       return {
         status: 'ok'
       };
-    }).catch(reject);
+    });
+}
+
+export function hideRoom(id) {
+  return FirebaseRef.child(`rooms/${id}`).update({ status: true })
+    .then(() => {
+      // Success
+      return {
+        status: 'ok'
+      };
+    });
+}
+
+export function unhideRoom(id) {
+  return FirebaseRef.child(`rooms/${id}`).update({ status: false })
+    .then(() => {
+      // Success
+      return {
+        status: 'ok'
+      };
+    });
 }
 
 /**

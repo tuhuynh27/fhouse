@@ -77,7 +77,9 @@ class Profile extends React.Component {
                     renderItem={({ item }) => (
                       <Card transparent style={{ paddingHorizontal: 0, paddingVertical: 5, borderRadius: 0 }}>
                         <CardItem>
-                          <Text style={{ fontWeight: '800', fontSize: 22 }}>{toTitleCase(recipes[item].address || "")}</Text>
+                          <Text style={{ fontWeight: '800', fontSize: 22 }}>
+                            {toTitleCase(recipes[item].address || "")} {recipes[item].isApproved === 0 && "(Pending)"} {recipes[item].isApproved === 2 && "(Rejected)"} {recipes[item].status === true && "(Hidden)"}
+                          </Text>
                         </CardItem>
                         <CardItem>
                           <Icon name="pin" style={{ color: '#000', fontSize: 20 }} />

@@ -19,7 +19,7 @@ class RecipeListing extends React.Component {
     let keys = Object.keys(props.recipes).reverse();
 
     keys = keys.filter((key) => {
-      return props.recipes[key].isApproved == 1;
+      return props.recipes[key].isApproved == 1 && props.recipes[key].status != true;
     });
 
     this.state = {
@@ -72,8 +72,9 @@ class RecipeListing extends React.Component {
     const { recipes } = this.props;
     let keys = Object.keys(this.props.recipes).reverse();
 
+    // Filter approve and hide
     keys = keys.filter((key) => {
-      return this.props.recipes[key].isApproved == 1;
+      return this.props.recipes[key].isApproved == 1 && this.props.recipes[key].status != true;
     });
 
     if (value !== 'all') {
@@ -95,8 +96,9 @@ class RecipeListing extends React.Component {
     const { districtSelect } = this.state;
     let keys = Object.keys(nextProps.recipes).reverse();
 
+    // Filter approve and hide
     keys = keys.filter((key) => {
-      return nextProps.recipes[key].isApproved == 1;
+      return nextProps.recipes[key].isApproved == 1 && nextProps.recipes[key].status != true;
     });
 
     if (districtSelect !== 'all') {
