@@ -31,6 +31,11 @@ class AccountListing extends React.Component {
       return;
     }
 
+    if (id === this.props.member.uid) {
+      alert("Sorry, you cannoy unset yourself.");
+      return;
+    }
+
     unsetAdmin(id);
   }
 

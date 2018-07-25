@@ -65,13 +65,6 @@ class SearchPage extends React.Component {
     });
   }
 
-  componentWillUpdate() {
-    const tenmil = 10000000;
-    if (this.state.value * tenmil % 1000000 === 0) {
-      this.filterRoom();
-    }
-  }
-
   render() {
 
     // Init var
