@@ -15,14 +15,14 @@ Running web app by Firebase Hosting: https://fhouse-app.firebaseapp.com/
 
 ### Environment:
 
-Assuming you have a working NodeJS environment and Yarn installed.
+Assuming you have a working Node.js environment (with `npm` dependency management).
 
 ### Set-up
 
 Fetch all dependencies of `npm`:
 
 ```
-$ yarn
+$ npm install
 ```
 
 ### Development
@@ -30,13 +30,13 @@ $ yarn
 Develop Expo with hot reload:
 
 ```
-yarn start
+npm run start
 ```
 
 Develop web app:
 
 ```
-yarn web
+npm run web
 ```
 
 **Recommended use with VSCode and ESLint installed.**
