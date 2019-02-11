@@ -13,6 +13,8 @@ Running web app by Firebase Hosting: https://fhouse-app.firebaseapp.com/
   - Authentication
   - Cloud Function (Serverless)
 
+![Firebase](https://cdn-images-1.medium.com/max/1600/1*QQp2cY4gTH5BQcbXmGVYbQ.png)
+
 ### Environment:
 
 Assuming you have a working Node.js environment (with `npm` dependency management).
