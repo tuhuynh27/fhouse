@@ -2,7 +2,9 @@ import React from 'react';
 import { Container, Content, Text, Form, Item, Label, Input, Picker, Icon, Button, List, ListItem, CheckBox, Body, Toast, Textarea } from 'native-base';
 import { View, Image, ActivityIndicator, Platform } from 'react-native';
 import Spacer from './Spacer';
-import { ImagePicker } from 'expo';
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
+import * as ImagePicker from 'expo-image-picker';
 import { Actions } from 'react-native-router-flux';
 
 import { normalizeStr, toUnsignedString, getLocationObj } from '../../common/util';
@@ -13,7 +15,9 @@ import { addRoom } from '../../actions/recipes';
 
 import { connect } from 'react-redux';
 
-import { Location, Permissions } from 'expo';
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
+import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
 
 class AddRoom extends React.Component {
