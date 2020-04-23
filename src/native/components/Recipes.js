@@ -9,7 +9,8 @@ import Spacer from './Spacer';
 
 import { toCurrency, toTitleCase, toUnsignedString, getLocationObj } from '../../common/util';
 
-import { Location, Permissions } from 'expo';
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
 import axios from 'axios';
 import moment from 'moment';
 class RecipeListing extends React.Component {
